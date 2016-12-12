@@ -1,0 +1,42 @@
+#Aliases used by Abhisek Panda on ubuntu 16.04 
+
+#---------------------------------------------------------------------------
+#---apps management------------------------------------------------------------
+alias update='sudo apt-get update'
+alias install='sudo apt-get install'
+alias upgrade='sudo apt-get upgrade'
+alias drivers='sudo apt-get dist-upgrade'
+alias makeover='sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade'
+alias remove='sudo apt-get --purge remove'
+alias autoremove='sudo apt-get autoremove'
+
+#----------------------------------------------------------------------------
+#---tools--------------------------------------------------------------------
+alias please='sudo $(history -p !!)'
+alias c='clear'
+alias e='exit'
+
+#-----------------------------------------------------------------------------
+#---ssh-----------------------------------------------------------------------
+alias proxy='ssh -XY apanda@mathserver.cc.iitk.ac.in'
+
+#-----------------------------------------------------------------------------
+#---Directory handling--------------------------------------------------------
+alias rm='rm -I'
+alias lh='ls -acX --color'
+alias ls='ls -1X --color'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+#------------------------------------------------------------------------------
+#---working around in the terminal---------------------------------------------
+alias open='xdg-open'
+alias match='lh -a | grep'
+alias process='ps -e | grep'
+
+#------------------------------------------------------------------------------
+alias run='./a.out'
+alias l='xtrlock'
+alias logout='pkill -u abhipanda'
+alias murder='pkill ps'
