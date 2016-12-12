@@ -174,7 +174,7 @@ set t_Co=256
 set background=dark
 colorscheme candyman
 "others:harlequin,peaksea,molokai,badwolf,candyman
-set scrolloff=6							"Scroll when 4 lines from top or bottom
+set scrolloff=6							"Scroll when 6 lines from top or bottom
 set cursorline							"Horizontal highlighting of cursorline
 
 "}}}
