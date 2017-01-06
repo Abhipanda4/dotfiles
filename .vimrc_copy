@@ -24,18 +24,15 @@
 "----------------------------------------------------------------------------------------------------
 "0.Necessary Requirements
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 set nocompatible
 filetype off
 autocmd VimEnter * echo "\t\t\t\t\t\t\t\t\t\"Sometimes you must hurt in order to know;\n \t\t\t\t\t\t\t\t\t\tFall in order to grow;\n\t\t\t\t\t\t\t\t\t\tLose in order to gain;\n \t\t\t\t\t\t\t\tBecause life's greatest lessons are learned through pain.\"\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t-Nagato Uzumaki\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 
-"}}}
 
 "----------------------------------------------------------------------------------------------------
 "1.Plugins:
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 set rtp+=~/.vim/bundle/vundle/			"set run time path to include vundle
 call vundle#rc()
@@ -46,36 +43,33 @@ Plugin 'flazz/vim-colorschemes'			"All in 1 colorscheme pack
 
 Plugin 'scrooloose/nerdcommenter'		"<leader>ci to toggle comment a line
 
-Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'			"Browse file tree like a pro
 
 Plugin 'godlygeek/tabular'				"To arrange a pattern in coloumn(t in command mode)
 
 Plugin 'lokaltog/vim-easymotion'		"<leader><leader>w to jump forward
 
-Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'				"Surround areas with brackets or quotes******
+
+Plugin 'alvan/vim-closetag'
+
+Plugin 'tmhedberg/matchit'
 
 filetype plugin indent on				"Add all plugins before this line
 
-"}}}
 
 "----------------------------------------------------------------------------------------------------
 "2.Line Structure:
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 set number
 set rnu									"Relative line numbering
-"set nowrap
-set foldmethod=marker
-set clipboard=unnamed
 
-"}}}
 
 
 "----------------------------------------------------------------------------------------------------
 "3.Advanced Searching:
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 set incsearch							"Google type search
 set hlsearch							"Highlight search results
@@ -83,27 +77,25 @@ set ignorecase
 set smartcase							"Ignore case unless capital letter is entered
 set nowrapscan
 
-"}}}
 
 
 "---------------------------------------------------------------------------------------------------
 "4.UserInterface Settings:
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 set wildmenu
 set wildmode=list:longest,full
-set showcmd
+"no redrawing when exeecuting macros
 set lazyredraw
 set ttyfast
 set showmatch
+set nobackup
+set noswapfile
 
-"}}}
 
 "----------------------------------------------------------------------------------------------------
 "5.Key Bindings
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 nnoremap ; :
 vnoremap ; :
@@ -128,12 +120,11 @@ nnoremap <Down> <NOP>
 nnoremap <Right> <NOP>
 nnoremap <Left> <NOP>
 
-"}}}
 
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
-"----------------------------------------------------------------------------------------------------
-"{{{
+"----------------------------------------------------------------------------------------------------"
+
 
 set autoindent
 set smarttab
@@ -144,12 +135,12 @@ set listchars=tab:..,trail:.	"highlight tabs"
 set list						"required for indent highlight"
 set noexpandtab
 
-"}}}
 
 "----------------------------------------------------------------------------------------------------
 "7.Statusline
 "----------------------------------------------------------------------------------------------------
-"{{{
+
+"My own vim-airline
 
 set laststatus=2
 set statusline=\ <<
@@ -162,27 +153,25 @@ set statusline+=%l					"Current line number
 set statusline+=/					"Separator
 set statusline+=%L\ 				"Total lines
 
-"}}}
+
 
 "----------------------------------------------------------------------------------------------------
 "8.Display
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 syntax enable
 set t_Co=256
 set background=dark
 colorscheme candyman
-"others:harlequin,peaksea,molokai,badwolf,candyman
+"others:harlequin,candyman,peaksea,molokai,badwolf,candyman
+"jellybeans,gardener
 set scrolloff=6							"Scroll when 6 lines from top or bottom
 set cursorline							"Horizontal highlighting of cursorline
 
-"}}}
 
 "----------------------------------------------------------------------------------------------------
 "9.Leader Key
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 let mapleader="\<Space>"
 
@@ -197,10 +186,6 @@ nnoremap <leader><leader>m :vsplit $MYVIMRC<cr>
 nnoremap <leader><leader>v :source $MYVIMRC<cr>
 "to refresh changes in vimrc ton a file without closing
 
-nmap <leader>/ <leader><leader>s
-"find a word by its first letter-- using easymotion plugin"
-imap <leader>/ <esc><leader><leader>s
-
 nnoremap <leader><leader>, <esc>mxggvG=`x
 "Indent the entire code(= is for indentation)"
 
@@ -209,8 +194,12 @@ nnoremap <leader><leader>n :NERDTreeToggle<cr>
 
 "mappings of the form <leader>key
 "---------------------------------------------
-nnoremap <leader>nh :nohlsearch<cr>
+nnoremap <leader>h :nohlsearch<cr>
 "to unhighlight the search matches
+
+nmap <leader>/ <leader><leader>s
+"find a word by its first letter-- using easymotion plugin"
+imap <leader>/ <esc><leader><leader>s
 
 vnoremap <leader>t :Tabularize /
 "tabularise plugin
@@ -218,14 +207,17 @@ vnoremap <leader>t :Tabularize /
 nnoremap <leader>q :q!<cr>
 "quit without saving"
 
-"}}}
+nnoremap <leader>j :bp<cr>
+"to go to the previous buffer(vim down)
+
+nnoremap <leader>k :bn<cr>
+"to go to the next buffer(vim up)
 
 "----------------------------------------------------------------------------------------------------
 "10.Auto-Completion
 "----------------------------------------------------------------------------------------------------
-"{{{
 
-inoremap { {}<Esc>i<cr><Esc>O
+inoremap {<cr> {}<Esc>i<cr><Esc>O
 
 augroup snippets
 	autocmd!
@@ -235,13 +227,11 @@ augroup snippets
 	autocmd filetype c inoremap <leader><leader>m int main(int argc,char* argv[])
 augroup END
 
-"}}}
 
 
 "----------------------------------------------------------------------------------------------------
 "11.Miscellaneous
 "----------------------------------------------------------------------------------------------------
-"{{{
 
 "11.1.Open File In Last Editing Position:
 augroup Entrypoint
@@ -259,6 +249,7 @@ hi statusline ctermfg=16 ctermbg=darkred
 au InsertEnter * hi statusline ctermfg=16 ctermbg=33
 au InsertLeave * hi statusline ctermfg=16 ctermbg=darkred
 
+
 "11.3.Timeouts:
 
 set timeoutlen=1000 
@@ -267,27 +258,25 @@ set ttimeoutlen=0
 "11.5.Custom Color-modes
 
 hi Search ctermfg=226 ctermbg=197 cterm=underline
-hi Comment ctermfg=103 ctermbg=NONE
+hi Comment ctermfg=218 ctermbg=NONE cterm=italic
 hi Matchparen ctermfg=226 ctermbg=197
 hi Wildmenu ctermfg=123 ctermbg=NONE cterm=underline
 hi Cursorline cterm=underline ctermbg=NONE
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
 hi SpecialKey ctermbg=NONE ctermfg=grey
-hi javaClassDecl ctermfg=78
+hi javaClassDecl ctermfg=120
 hi javaScopeDecl ctermfg=199
 hi operator ctermfg=226 cterm=bold
 hi storageClass ctermfg=214 cterm=bold
-hi folded ctermfg=150 ctermfg=NONE
-hi Statement ctermfg=93
+hi Statement ctermfg=99
 hi string ctermfg=118
 
 "cterm=texttype;
 "ctermbg=background;
 "ctermfg=textcolor
 
-"}}}
 
 
 "TODO:		1>add abbreviations for common statements
-"2>use H L to move to beginning and end of line(stronger h and l) instead of 0 & $
+			"2>add shortcuts for working with multiple buffers
