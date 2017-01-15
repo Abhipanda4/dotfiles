@@ -49,6 +49,8 @@ Plugin 'godlygeek/tabular'				"To arrange a pattern in coloumn(t in command mode
 
 Plugin 'lokaltog/vim-easymotion'		"<leader><leader>w to jump forward
 
+Plugin 'kien/ctrlp.vim'
+
 Plugin 'tpope/vim-surround'				"Surround areas with brackets or quotes******
 
 Plugin 'alvan/vim-closetag'
@@ -64,8 +66,6 @@ filetype plugin indent on				"Add all plugins before this line
 
 set number
 set rnu									"Relative line numbering
-
-
 
 "----------------------------------------------------------------------------------------------------
 "3.Advanced Searching:
@@ -91,6 +91,7 @@ set ttyfast
 set showmatch
 set nobackup
 set noswapfile
+set showmode
 
 
 "----------------------------------------------------------------------------------------------------
@@ -107,7 +108,6 @@ nnoremap <cr> o<esc>
 nnoremap j gj
 nnoremap k gk
 "Natural movement in case of wrapped lines;NO skipping
-"inoremap <F2> <esc>:w<cr>a
 nnoremap H ^
 nnoremap L g_
 "Disable the arrow keys for familiarization with vim movements"
@@ -119,7 +119,6 @@ nnoremap <Up> <NOP>
 nnoremap <Down> <NOP>
 nnoremap <Right> <NOP>
 nnoremap <Left> <NOP>
-
 
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
@@ -144,15 +143,15 @@ set noexpandtab
 
 set laststatus=2
 set statusline=\ <<
-set statusline+=\ %F				"Full path to file
-set statusline+=\ >>\ Filetype:		"Connector
-set statusline+=%y					"Filetype
-set statusline+=%m					"[+] if change has occured
-set statusline+=%=					"Jump to right side
-set statusline+=%l					"Current line number
-set statusline+=/					"Separator
-set statusline+=%L\ 				"Total lines
-
+set statusline+=\ %F					"Full path to file
+set statusline+=\ >>\ \ \ Filetype:%y	"Connector & filetype
+set statusline+=\ \ %r					"readonly flag
+set statusline+=\ \ \ %m				"[+] if change has occured
+set statusline+=%=						"Jump to right side
+set statusline+=\[\ Buf:%n\ \]\ 		"buffer number settings(experimenting)
+set statusline+=%#Style#\ %l			"Current line number
+set statusline+=/						"Separator
+set statusline+=%L\ 					"Total lines
 
 
 "----------------------------------------------------------------------------------------------------
@@ -225,6 +224,8 @@ augroup snippets
 	autocmd filetype java inoremap <leader><leader>m public static void main(String args[])
 	autocmd filetype java inoremap <leader><leader>, System.out.println(
 	autocmd filetype c inoremap <leader><leader>m int main(int argc,char* argv[])
+	autocmd filetype javascript inoremap <leader><leader>, (function(event) {});<esc>hhi<cr><esc>O
+	autocmd filetype javascript inoremap <leader><leader>m $(document).ready(function(){});<esc>hhi<cr><esc>O
 augroup END
 
 
@@ -245,9 +246,23 @@ augroup END
 
 "11.2.Statatusline Color:
 
-hi statusline ctermfg=16 ctermbg=darkred
-au InsertEnter * hi statusline ctermfg=16 ctermbg=33
-au InsertLeave * hi statusline ctermfg=16 ctermbg=darkred
+hi statusline ctermfg=16 ctermbg=154
+
+function! InsertStatuslineColor(mode)			"func to change stl colors on entering insert mode
+	if a:mode == 'i'
+		hi Statusline ctermbg=33 ctermfg=16		
+		"insert mode
+	elseif a:mode == 'r'
+		hi Statusline ctermbg=magenta
+		"replace(shift + r) mode
+	else
+		hi Statusline ctermbg=red
+	endif
+endfunction
+
+au InsertEnter * call InsertStatuslineColor(v:insertmode)	"call the func on entering insert mode
+au InsertLeave * hi statusline ctermfg=16 ctermbg=154
+"on leaving insert mode
 
 
 "11.3.Timeouts:
@@ -258,7 +273,7 @@ set ttimeoutlen=0
 "11.5.Custom Color-modes
 
 hi Search ctermfg=226 ctermbg=197 cterm=underline
-hi Comment ctermfg=218 ctermbg=NONE cterm=italic
+hi Comment ctermfg=206 ctermbg=NONE cterm=italic
 hi Matchparen ctermfg=226 ctermbg=197
 hi Wildmenu ctermfg=123 ctermbg=NONE cterm=underline
 hi Cursorline cterm=underline ctermbg=NONE
@@ -271,6 +286,8 @@ hi operator ctermfg=226 cterm=bold
 hi storageClass ctermfg=214 cterm=bold
 hi Statement ctermfg=99
 hi string ctermfg=118
+hi statuslineNC ctermbg=202 ctermfg=16
+hi Style ctermbg=16 ctermfg=255
 
 "cterm=texttype;
 "ctermbg=background;
@@ -279,4 +296,5 @@ hi string ctermfg=118
 
 
 "TODO:		1>add abbreviations for common statements
-			"2>add shortcuts for working with multiple buffers
+"			2>add mode indicators to status line
+"			3>add buffer number to statusline
