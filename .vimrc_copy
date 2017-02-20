@@ -27,7 +27,7 @@
 
 set nocompatible
 filetype off
-autocmd VimEnter * echo "\t\t\t\t\t\t\t\t\t\"Sometimes you must hurt in order to know;\n \t\t\t\t\t\t\t\t\t\tFall in order to grow;\n\t\t\t\t\t\t\t\t\t\tLose in order to gain;\n \t\t\t\t\t\t\t\tBecause life's greatest lessons are learned through pain.\"\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t-Nagato Uzumaki\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+autocmd VimEnter * echo "\t\t\t\"Sometimes you must hurt in order to know;\n \t\t\t\tFall in order to grow;\n\t\t\t\tLose in order to gain;\n \t\tBecause life's greatest lessons are learned through pain.\"\n\n\t\t\t\t\t\t\t\t-Nagato Uzumaki\n\n\n\n\n\n\n\n\n"
 
 
 "----------------------------------------------------------------------------------------------------
@@ -43,19 +43,19 @@ Plugin 'flazz/vim-colorschemes'			"All in 1 colorscheme pack
 
 Plugin 'scrooloose/nerdcommenter'		"<leader>ci to toggle comment a line
 
-Plugin 'scrooloose/nerdtree'			"Browse file tree like a pro
+Plugin 'scrooloose/nerdtree'
 
 Plugin 'godlygeek/tabular'				"To arrange a pattern in coloumn(t in command mode)
 
 Plugin 'lokaltog/vim-easymotion'		"<leader><leader>w to jump forward
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'					"browse files with style
 
 Plugin 'tpope/vim-surround'				"Surround areas with brackets or quotes******
 
-Plugin 'alvan/vim-closetag'
+Plugin 'alvan/vim-closetag'				"html utility
 
-Plugin 'tmhedberg/matchit'
+Plugin 'tmhedberg/matchit'				"html utility
 
 filetype plugin indent on				"Add all plugins before this line
 
@@ -91,7 +91,7 @@ set ttyfast
 set showmatch
 set nobackup
 set noswapfile
-set showmode
+set hidden		"change buffers without saving
 
 
 "----------------------------------------------------------------------------------------------------
@@ -111,6 +111,7 @@ nnoremap k gk
 nnoremap H ^
 nnoremap L g_
 "Disable the arrow keys for familiarization with vim movements"
+nnoremap \ i<space><Esc>
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 inoremap <Right> <NOP>
@@ -130,8 +131,6 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-set listchars=tab:..,trail:.	"highlight tabs"
-set list						"required for indent highlight"
 set noexpandtab
 
 
@@ -161,7 +160,7 @@ set statusline+=%L\ 					"Total lines
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme candyman
+colorscheme zenburn
 "others:harlequin,candyman,peaksea,molokai,badwolf,candyman
 "jellybeans,gardener
 set scrolloff=6							"Scroll when 6 lines from top or bottom
@@ -246,48 +245,44 @@ augroup END
 
 "11.2.Statatusline Color:
 
-hi statusline ctermfg=16 ctermbg=154
+hi statusline ctermbg=16 ctermfg=172
 
 function! InsertStatuslineColor(mode)			"func to change stl colors on entering insert mode
 	if a:mode == 'i'
-		hi Statusline ctermbg=33 ctermfg=16		
+		hi Statusline ctermbg=16 ctermfg=222
 		"insert mode
 	elseif a:mode == 'r'
-		hi Statusline ctermbg=magenta
+		hi Statusline ctermfg=30
 		"replace(shift + r) mode
 	else
-		hi Statusline ctermbg=red
+		hi Statusline ctermfg=49
 	endif
 endfunction
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)	"call the func on entering insert mode
-au InsertLeave * hi statusline ctermfg=16 ctermbg=154
+au InsertLeave * hi statusline ctermbg=16 ctermfg=172
 "on leaving insert mode
 
 
 "11.3.Timeouts:
 
-set timeoutlen=1000 
+set timeoutlen=1000
 set ttimeoutlen=0
 
 "11.5.Custom Color-modes
 
 hi Search ctermfg=226 ctermbg=197 cterm=underline
-hi Comment ctermfg=206 ctermbg=NONE cterm=italic
 hi Matchparen ctermfg=226 ctermbg=197
+hi comment cterm=italic
 hi Wildmenu ctermfg=123 ctermbg=NONE cterm=underline
-hi Cursorline cterm=underline ctermbg=NONE
+hi Cursorline cterm=none ctermbg=239
+hi CursorlineNr cterm=underline ctermfg=157
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
-hi SpecialKey ctermbg=NONE ctermfg=grey
-hi javaClassDecl ctermfg=120
-hi javaScopeDecl ctermfg=199
-hi operator ctermfg=226 cterm=bold
-hi storageClass ctermfg=214 cterm=bold
-hi Statement ctermfg=99
-hi string ctermfg=118
-hi statuslineNC ctermbg=202 ctermfg=16
+hi statuslineNC ctermbg=16 ctermfg=49
+hi statement ctermbg=none
 hi Style ctermbg=16 ctermfg=255
+hi incsearch ctermbg=16 ctermfg=157
 
 "cterm=texttype;
 "ctermbg=background;
