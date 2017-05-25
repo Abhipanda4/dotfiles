@@ -57,6 +57,9 @@ Plugin 'alvan/vim-closetag'				"html utility
 
 Plugin 'tmhedberg/matchit'				"html utility
 
+Plugin 'MarcWeber/vim-addon-mw-utils'
+
+
 filetype plugin indent on				"Add all plugins before this line
 
 
@@ -141,9 +144,11 @@ set noexpandtab
 "My own vim-airline
 
 set laststatus=2
-set statusline=\ <<
+set statusline=
+set statusline+=%#filename#\ <<
 set statusline+=\ %F					"Full path to file
-set statusline+=\ >>\ \ \ Filetype:%y	"Connector & filetype
+set statusline+=\ >>\  					"Connector
+set statusline+=%#NormalStyles#\ Filetype:%y				"Filetype
 set statusline+=\ \ %r					"readonly flag
 set statusline+=\ \ \ %m				"[+] if change has occured
 set statusline+=%=						"Jump to right side
@@ -223,6 +228,7 @@ augroup snippets
 	autocmd filetype java inoremap <leader><leader>m public static void main(String args[])
 	autocmd filetype java inoremap <leader><leader>, System.out.println(
 	autocmd filetype c inoremap <leader><leader>m int main(int argc,char* argv[])
+	autocmd filetype cpp inoremap <leader><leader>m int main(int argc,char* argv[])
 	autocmd filetype javascript inoremap <leader><leader>, (function(event) {});<esc>hhi<cr><esc>O
 	autocmd filetype javascript inoremap <leader><leader>m $(document).ready(function(){});<esc>hhi<cr><esc>O
 augroup END
@@ -280,9 +286,12 @@ hi CursorlineNr cterm=underline ctermfg=157
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
 hi statuslineNC ctermbg=16 ctermfg=49
-hi statement ctermbg=none
+hi statement ctermbg=NONE
 hi Style ctermbg=16 ctermfg=255
+hi filename ctermbg=16 ctermfg=255
 hi incsearch ctermbg=16 ctermfg=157
+"hi Operator ctermbg=none ctermfg=197
+hi storageclass ctermbg=none ctermfg=197
 
 "cterm=texttype;
 "ctermbg=background;
