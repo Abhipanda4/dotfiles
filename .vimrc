@@ -47,9 +47,7 @@ Plugin 'scrooloose/nerdtree'
 
 Plugin 'godlygeek/tabular'				"To arrange a pattern in coloumn(t in command mode)
 
-Plugin 'lokaltog/vim-easymotion'		"<leader><leader>w to jump forward
-
-Plugin 'kien/ctrlp.vim'					"browse files with style
+Plugin 'lokaltog/vim-easymotion'		"<leader>/ to start search
 
 Plugin 'tpope/vim-surround'				"Surround areas with brackets or quotes******
 
@@ -59,9 +57,9 @@ Plugin 'tmhedberg/matchit'				"html utility
 
 Plugin 'Valloric/YouCompleteMe'
 
-Plugin 'luochen1990/rainbow'
-let g:rainbow_active = 0				"off by default
+Plugin 'ap/vim-buftabline'
 
+Plugin '2072/PHP-Indenting-for-VIm'
 filetype plugin indent on				"Add all plugins before this line
 
 
@@ -97,6 +95,8 @@ set showmatch
 set nobackup
 set noswapfile
 set hidden		"change buffers without saving
+set splitbelow
+set splitright
 
 
 "----------------------------------------------------------------------------------------------------
@@ -126,6 +126,12 @@ nnoremap <Down> <NOP>
 nnoremap <Right> <NOP>
 nnoremap <Left> <NOP>
 
+"Handle splits the right way
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
 "----------------------------------------------------------------------------------------------------"
@@ -147,15 +153,15 @@ set noexpandtab
 
 set laststatus=2
 set statusline=
-set statusline+=\ <<
-set statusline+=\ %F					"Full path to file
-set statusline+=\ >>\  					"Connector
+set statusline+=\ <
+set statusline+=\ %f					"Full path to file
+set statusline+=\ >\ %#Style#\   					"Connector
 set statusline+=\ Filetype:%y				"Filetype
 set statusline+=\ \ %r					"readonly flag
 set statusline+=\ \ \ %m				"[+] if change has occured
 set statusline+=%=						"Jump to right side
 set statusline+=\[\ Buf:%n\ \]\ 		"buffer number settings(experimenting)
-set statusline+=%#Style#\ %l			"Current line number
+set statusline+=%l			"Current line number
 set statusline+=/						"Separator
 set statusline+=%L\ 					"Total lines
 
@@ -167,7 +173,7 @@ set statusline+=%L\ 					"Total lines
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme zenburn
+colorscheme gardener
 "others:harlequin,candyman,peaksea,molokai,badwolf,candyman
 "jellybeans,gardener
 set scrolloff=6							"Scroll when 6 lines from top or bottom
@@ -220,6 +226,18 @@ nnoremap <leader>k :bn<cr>
 
 nnoremap <leader>r :RainbowToggle<cr>
 
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+
 "----------------------------------------------------------------------------------------------------
 "10.Auto-Completion
 "----------------------------------------------------------------------------------------------------
@@ -229,12 +247,13 @@ inoremap {<cr> {}<Esc>i<cr><Esc>O
 augroup snippets
 	autocmd!
 	"<leader><leader>m will always write the main statement in every language
+
 	autocmd filetype java inoremap <leader><leader>m public static void main(String args[])
 	autocmd filetype java inoremap <leader><leader>, System.out.println(
 	autocmd filetype c inoremap <leader><leader>m int main(int argc,char* argv[])
+	autocmd filetype c inoremap <leader><leader>h #include<stdio.h><cr>#include<stdlib.h>
+	autocmd filetype cpp inoremap <leader><leader>h #include<stdio.h><cr>#include<stdlib.h>
 	autocmd filetype cpp inoremap <leader><leader>m int main(int argc,char* argv[])
-	autocmd filetype javascript inoremap <leader><leader>, (function(event) {});<esc>hhi<cr><esc>O
-	autocmd filetype javascript inoremap <leader><leader>m $(document).ready(function(){});<esc>hhi<cr><esc>O
 augroup END
 
 
@@ -255,45 +274,23 @@ augroup END
 
 "11.2.Statatusline Color:
 
-hi statusline ctermbg=16 ctermfg=172
+hi statusline ctermbg=124 ctermfg=16
 
 function! InsertStatuslineColor(mode)			"func to change stl colors on entering insert mode
+	" insert mode
 	if a:mode == 'i'
-		hi Statusline ctermbg=16 ctermfg=222
-		"insert mode
+		hi Statusline ctermbg=156 ctermfg=16
 	elseif a:mode == 'r'
-		hi Statusline ctermfg=30
+		hi Statusline ctermbg=167
 		"replace(shift + r) mode
 	else
-		hi Statusline ctermfg=49
+		hi Statusline ctermbg=124
 	endif
 endfunction
 
-let g:rainbow_conf = {
-	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-	\	'operators': '_,_',
-	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-	\	'separately': {
-	\		'*': {},
-	\		'tex': {
-	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-	\		},
-	\		'lisp': {
-	\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-	\		},
-	\		'vim': {
-	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-	\		},
-	\		'html': {
-	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-	\		},
-	\		'css': 0,
-	\	}
-	\}
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)	"call the func on entering insert mode
-au InsertLeave * hi statusline ctermbg=16 ctermfg=172
+au InsertLeave * hi statusline ctermbg=124 ctermfg=16
 "on leaving insert mode
 
 
@@ -302,24 +299,28 @@ au InsertLeave * hi statusline ctermbg=16 ctermfg=172
 set timeoutlen=1000
 set ttimeoutlen=0
 
-"11.5.Custom Color-modes
+"11.4.Custom Color-modes
 
-hi Search ctermfg=226 ctermbg=197 cterm=underline
+hi Search ctermfg=226 ctermbg=160 cterm=underline
+hi Visual ctermbg=53
 hi Matchparen ctermfg=226 ctermbg=197
 hi comment cterm=italic ctermfg=244
 hi Wildmenu ctermfg=222 ctermbg=NONE cterm=underline
-hi Cursorline cterm=underline ctermbg=NONE
+hi Cursorline cterm=None ctermbg=237
 hi CursorlineNr cterm=NONE ctermfg=157
 hi LineNr ctermbg=232 ctermfg=123
-hi Pmenu ctermbg=232 ctermfg=30
+hi Pmenu ctermbg=232 ctermfg=79
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
-hi statuslineNC ctermbg=16 ctermfg=49
+hi statuslineNC ctermbg=215 ctermfg=16
 hi statement ctermbg=NONE
 hi Style ctermbg=16 ctermfg=255
 hi filename ctermbg=16 ctermfg=255
-hi incsearch ctermbg=16 ctermfg=157
+hi incsearch ctermbg=196 ctermfg=16
 hi storageclass ctermbg=none ctermfg=197
+hi TabLineFill ctermfg=16
+hi TablineSel ctermbg=16 ctermfg=15
+hi Tabline cterm=NONE ctermbg=16 ctermfg=223
 
 "cterm=texttype;
 "ctermbg=background;
