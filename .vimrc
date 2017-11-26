@@ -27,7 +27,8 @@
 
 set nocompatible
 filetype off
-autocmd VimEnter * echo "\t\t\t\"Sometimes you must hurt in order to know;\n \t\t\t\tFall in order to grow;\n\t\t\t\tLose in order to gain;\n \t\tBecause life's greatest lessons are learned through pain.\"\n\n\t\t\t\t\t\t\t\t-Nagato Uzumaki\n\n\n\n\n\n\n\n\n"
+"autocmd VimEnter * echo '\t\t\t\'Sometimes you must hurt in order to know;\n \t\t\t\tFall in order to grow;\n\t\t\t\tLose in order to gain;\n \t\tBecause life's greatest lessons are learned through pain.\"\n\n\t\t\t\t\t\t\t\t-Nagato Uzumaki\n\n\n\n\n\n\n\n\n"
+"
 
 
 "----------------------------------------------------------------------------------------------------
@@ -43,23 +44,18 @@ Plugin 'flazz/vim-colorschemes'			"All in 1 colorscheme pack
 
 Plugin 'scrooloose/nerdcommenter'		"<leader>ci to toggle comment a line
 
-Plugin 'scrooloose/nerdtree'
-
-Plugin 'godlygeek/tabular'				"To arrange a pattern in coloumn(t in command mode)
-
 Plugin 'lokaltog/vim-easymotion'		"<leader>/ to start search
 
 Plugin 'tpope/vim-surround'				"Surround areas with brackets or quotes******
 
 Plugin 'alvan/vim-closetag'				"html utility
 
-Plugin 'tmhedberg/matchit'				"html utility
-
 Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'ap/vim-buftabline'
 
-Plugin '2072/PHP-Indenting-for-VIm'
+Plugin 'ctrlpvim/ctrlp.vim'
+
 filetype plugin indent on				"Add all plugins before this line
 
 
@@ -97,6 +93,7 @@ set noswapfile
 set hidden		"change buffers without saving
 set splitbelow
 set splitright
+set showcmd
 
 
 "----------------------------------------------------------------------------------------------------
@@ -115,8 +112,8 @@ nnoremap k gk
 "Natural movement in case of wrapped lines;NO skipping
 nnoremap H ^
 nnoremap L g_
-"Disable the arrow keys for familiarization with vim movements"
 nnoremap \ i<space><Esc>
+"Disable the arrow keys for familiarization with vim movements"
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 inoremap <Right> <NOP>
@@ -173,10 +170,10 @@ set statusline+=%L\ 					"Total lines
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme gardener
+colorscheme termschool
 "others:harlequin,candyman,peaksea,molokai,badwolf,candyman
 "jellybeans,gardener
-set scrolloff=6							"Scroll when 6 lines from top or bottom
+set scrolloff=12							"Scroll when 6 lines from top or bottom
 set cursorline							"Horizontal highlighting of cursorline
 
 
@@ -200,9 +197,6 @@ nnoremap <leader><leader>v :source $MYVIMRC<cr>
 nnoremap <leader><leader>, <esc>mxggvG=`x
 "Indent the entire code(= is for indentation)"
 
-nnoremap <leader><leader>n :NERDTreeToggle<cr>
-"opens up NERDTree
-
 "mappings of the form <leader>key
 "---------------------------------------------
 nnoremap <leader>h :nohlsearch<cr>
@@ -224,8 +218,6 @@ nnoremap <leader>j :bp<cr>
 nnoremap <leader>k :bn<cr>
 "to go to the next buffer(vim up)
 
-nnoremap <leader>r :RainbowToggle<cr>
-
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
 nmap <leader>3 <Plug>BufTabLine.Go(3)
@@ -244,19 +236,6 @@ nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 inoremap {<cr> {}<Esc>i<cr><Esc>O
 
-augroup snippets
-	autocmd!
-	"<leader><leader>m will always write the main statement in every language
-
-	autocmd filetype java inoremap <leader><leader>m public static void main(String args[])
-	autocmd filetype java inoremap <leader><leader>, System.out.println(
-	autocmd filetype c inoremap <leader><leader>m int main(int argc,char* argv[])
-	autocmd filetype c inoremap <leader><leader>h #include<stdio.h><cr>#include<stdlib.h>
-	autocmd filetype cpp inoremap <leader><leader>h #include<stdio.h><cr>#include<stdlib.h>
-	autocmd filetype cpp inoremap <leader><leader>m int main(int argc,char* argv[])
-augroup END
-
-
 
 "----------------------------------------------------------------------------------------------------
 "11.Miscellaneous
@@ -274,23 +253,28 @@ augroup END
 
 "11.2.Statatusline Color:
 
-hi statusline ctermbg=124 ctermfg=16
+" vim buftabline configurations
+let g:buftabline_numbers=2
+let g:buftabline_indicators=1
+
+"statusline config
+hi statusline ctermbg=40 ctermfg=16
 
 function! InsertStatuslineColor(mode)			"func to change stl colors on entering insert mode
 	" insert mode
 	if a:mode == 'i'
-		hi Statusline ctermbg=156 ctermfg=16
+		hi Statusline ctermbg=150 ctermfg=16
 	elseif a:mode == 'r'
-		hi Statusline ctermbg=167
+		hi Statusline ctermbg=92
 		"replace(shift + r) mode
 	else
-		hi Statusline ctermbg=124
+		hi Statusline ctermbg=40
 	endif
 endfunction
 
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)	"call the func on entering insert mode
-au InsertLeave * hi statusline ctermbg=124 ctermfg=16
+au InsertLeave * hi statusline ctermbg=40 ctermfg=16
 "on leaving insert mode
 
 
@@ -301,28 +285,47 @@ set ttimeoutlen=0
 
 "11.4.Custom Color-modes
 
-hi Search ctermfg=226 ctermbg=160 cterm=underline
-hi Visual ctermbg=53
-hi Matchparen ctermfg=226 ctermbg=197
-hi comment cterm=italic ctermfg=244
-hi Wildmenu ctermfg=222 ctermbg=NONE cterm=underline
+hi Search ctermbg=166 ctermfg=232
+hi Visual ctermbg=53 ctermfg=41
+hi Matchparen ctermfg=196 ctermbg=226
+hi Wildmenu ctermfg=16 ctermbg=255 cterm=bold
 hi Cursorline cterm=None ctermbg=237
-hi CursorlineNr cterm=NONE ctermfg=157
-hi LineNr ctermbg=232 ctermfg=123
-hi Pmenu ctermbg=232 ctermfg=79
+hi CursorlineNr cterm=NONE ctermfg=166 ctermbg=232
+hi LineNr ctermbg=232 ctermfg=41
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
-hi statuslineNC ctermbg=215 ctermfg=16
 hi statement ctermbg=NONE
 hi Style ctermbg=16 ctermfg=255
 hi filename ctermbg=16 ctermfg=255
-hi incsearch ctermbg=196 ctermfg=16
-hi storageclass ctermbg=none ctermfg=197
-hi TabLineFill ctermfg=16
-hi TablineSel ctermbg=16 ctermfg=15
-hi Tabline cterm=NONE ctermbg=16 ctermfg=223
+hi incsearch ctermbg=232 ctermfg=87
+hi Comment ctermbg=NONE ctermfg=42
+hi TODO ctermbg=NONE ctermfg=169
 
+hi statuslineNC ctermbg=41 ctermfg=16
+hi BufTabLineActive ctermbg=41 ctermfg=232
+hi BufTabLineCurrent ctermbg=40 ctermfg=232
+hi BufTabLineHidden ctermfg=41 ctermbg=232
+hi TabLineFill ctermfg=232
+
+hi PMenu ctermbg=232 ctermfg=253
+hi PMenuSel ctermbg=99 ctermfg=232
 "cterm=texttype;
 "ctermbg=background;
 "ctermfg=textcolor
 
+
+"11.5. Trailing White Spaces and Leading Tab characters
+hi ExtraWhiteSpace ctermbg=57
+
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+
+
+" 12. Plugin Settings
+
+"12.1. CtrlP
+let g:ctrlp_by_filename = 1
