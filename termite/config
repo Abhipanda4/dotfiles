@@ -1,0 +1,89 @@
+[options]
+#allow_bold = true
+#audible_bell = false
+#clickable_url = true
+#dynamic_title = true
+font = Ubuntu Mono Bold 12
+#fullscreen = true
+#geometry = 640x480
+#icon_name = terminal
+#mouse_autohide = false
+#scroll_on_output = false
+#scroll_on_keystroke = true
+# Length of the scrollback buffer, 0 disabled the scrollback buffer
+# and setting it to a negative value means "infinite scrollback"
+scrollback_lines = 10000
+#search_wrap = true
+#urgent_on_bell = true
+#hyperlinks = false
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+#browser = xdg-open
+
+# "system", "on" or "off"
+#cursor_blink = system
+
+# "block", "underline" or "ibeam"
+#cursor_shape = block
+
+# Hide links that are no longer valid in url select overlay mode
+#filter_unmatched_urls = true
+
+# Emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+# set size hints for the window
+#size_hints = false
+
+# "off", "left" or "right"
+#scrollbar = off
+
+[colors]
+# If both of these are unset, cursor falls back to the foreground color,
+# and cursor_foreground falls back to the background color.
+#cursor = #777777
+#cursor_foreground = #dcdccc
+
+# 20% background transparency (requires a compositor)
+
+# If unset, will reverse foreground and background
+highlight = #444444
+
+foreground =                          #eddcd3
+background =                          #1b1b1b
+cursorColor=  #e8daa9
+color0=       #1f1414
+color8=       #ac7339
+color1 =      #CB4C4C
+color9=       #b99d85
+color2=       #339966
+color10=      #d0b081
+color3 =	  #F9D082
+color11=      #996267
+color4=       #eeeeee
+color12=      #d9ca93
+color5=       #b5876d
+color13=      #cba370
+color6 =      #20A2B3
+color14=      #0C7543
+color7=       #e8daa9
+color15=      #bbffbb
+
+
+# extra color definitions for vim
+color40 =							  #CB4C4C
+color41 =							  #B1B1B1
+color42 =							  #666666
+
+[hints]
+#font = Monospace 12
+#foreground = #dcdccc
+#background = #3f3f3f
+#active_foreground = #e68080
+#active_background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 0.5
+#roundness = 2.0
+
+# vim: ft=dosini cms=#%s
