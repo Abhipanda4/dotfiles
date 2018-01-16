@@ -35,18 +35,18 @@ filetype off
 "1.Plugins:
 "----------------------------------------------------------------------------------------------------
 
-set rtp+=~/.vim/bundle/vundle/			"set run time path to include vundle
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/			"set run time path to include vundle
+call vundle#begin()
 
-Plugin 'gmarik/vundle'					"let vundle manage vundle,REQUIRED
+Plugin 'gmarik/Vundle.vim'              "let vundle manage vundle,REQUIRED
 
-Plugin 'flazz/vim-colorschemes'			"All in 1 colorscheme pack
+Plugin 'flazz/vim-colorschemes'         "All in 1 colorscheme pack
 
-Plugin 'scrooloose/nerdcommenter'		"<leader>ci to toggle comment a line
+Plugin 'scrooloose/nerdcommenter'       "<leader>ci to toggle comment a line
 
-Plugin 'lokaltog/vim-easymotion'		"<leader>/ to start search
+Plugin 'lokaltog/vim-easymotion'        "<leader>/ to start search
 
-Plugin 'tpope/vim-surround'				"Surround areas with brackets or quotes******
+Plugin 'tpope/vim-surround'             "Surround areas with brackets or quotes******
 
 Plugin 'alvan/vim-closetag'				"html utility
 
@@ -56,6 +56,9 @@ Plugin 'ap/vim-buftabline'
 
 Plugin 'ctrlpvim/ctrlp.vim'
 
+Plugin 'godlygeek/tabular'
+
+call vundle#end()
 filetype plugin indent on				"Add all plugins before this line
 
 
@@ -74,7 +77,7 @@ set incsearch							"Google type search
 set hlsearch							"Highlight search results
 set ignorecase
 set smartcase							"Ignore case unless capital letter is entered
-set nowrapscan
+set wrapscan
 
 
 
@@ -170,7 +173,7 @@ set statusline+=%L\ 					"Total lines
 syntax enable
 set t_Co=256
 set background=dark
-colorscheme termschool
+colorscheme wal
 "others:harlequin,candyman,peaksea,molokai,badwolf,candyman
 "jellybeans,gardener
 set scrolloff=12							"Scroll when 6 lines from top or bottom
@@ -253,19 +256,15 @@ augroup END
 
 "11.2.Statatusline Color:
 
-" vim buftabline configurations
-let g:buftabline_numbers=2
-let g:buftabline_indicators=1
-
 "statusline config
-hi statusline ctermbg=40 ctermfg=16
+hi statusline ctermbg=1 ctermfg=16
 
 function! InsertStatuslineColor(mode)			"func to change stl colors on entering insert mode
 	" insert mode
 	if a:mode == 'i'
-		hi Statusline ctermbg=150 ctermfg=16
+		hi Statusline ctermbg=43 ctermfg=16
 	elseif a:mode == 'r'
-		hi Statusline ctermbg=92
+		hi Statusline ctermbg=167
 		"replace(shift + r) mode
 	else
 		hi Statusline ctermbg=40
@@ -274,7 +273,7 @@ endfunction
 
 
 au InsertEnter * call InsertStatuslineColor(v:insertmode)	"call the func on entering insert mode
-au InsertLeave * hi statusline ctermbg=40 ctermfg=16
+au InsertLeave * hi statusline ctermbg=1 ctermfg=16
 "on leaving insert mode
 
 
@@ -285,37 +284,18 @@ set ttimeoutlen=0
 
 "11.4.Custom Color-modes
 
+hi IncSearch ctermbg=40 ctermfg=232
 hi Search ctermbg=166 ctermfg=232
-hi Visual ctermbg=53 ctermfg=41
-hi Matchparen ctermfg=196 ctermbg=226
 hi Wildmenu ctermfg=16 ctermbg=255 cterm=bold
-hi Cursorline cterm=None ctermbg=237
-hi CursorlineNr cterm=NONE ctermfg=166 ctermbg=232
-hi LineNr ctermbg=232 ctermfg=41
-hi Normal ctermbg=NONE
-hi NonText ctermbg=NONE
-hi statement ctermbg=NONE
 hi Style ctermbg=16 ctermfg=255
-hi filename ctermbg=16 ctermfg=255
-hi incsearch ctermbg=232 ctermfg=87
-hi Comment ctermbg=NONE ctermfg=42
-hi TODO ctermbg=NONE ctermfg=169
-
-hi statuslineNC ctermbg=41 ctermfg=16
-hi BufTabLineActive ctermbg=41 ctermfg=232
-hi BufTabLineCurrent ctermbg=40 ctermfg=232
-hi BufTabLineHidden ctermfg=41 ctermbg=232
-hi TabLineFill ctermfg=232
-
-hi PMenu ctermbg=232 ctermfg=253
-hi PMenuSel ctermbg=99 ctermfg=232
-"cterm=texttype;
-"ctermbg=background;
-"ctermfg=textcolor
-
+hi statuslineNC ctermbg=3 ctermfg=16
+hi BufTabLineActive ctermbg=3 ctermfg=232
+hi BufTabLineCurrent ctermbg=1 ctermfg=232
+hi Matchparen ctermbg=41 ctermfg=232
+hi cursorline ctermbg=233
 
 "11.5. Trailing White Spaces and Leading Tab characters
-hi ExtraWhiteSpace ctermbg=57
+hi ExtraWhiteSpace ctermbg=41
 
 match ExtraWhitespace /\s\+$/
 autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
@@ -323,9 +303,11 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-
-
 " 12. Plugin Settings
 
 "12.1. CtrlP
 let g:ctrlp_by_filename = 1
+
+"12.2 vim buftabline configurations
+let g:buftabline_numbers=2
+let g:buftabline_indicators=1
