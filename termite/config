@@ -3,7 +3,7 @@
 #audible_bell = false
 #clickable_url = true
 #dynamic_title = true
-font = Ubuntu Mono Bold 12
+font = Monospace 10.5
 #fullscreen = true
 #geometry = 640x480
 #icon_name = terminal
@@ -47,33 +47,33 @@ scrollback_lines = 10000
 # 20% background transparency (requires a compositor)
 
 # If unset, will reverse foreground and background
-highlight = #444444
+highlight =   #444444
+foreground =  #b9b9b9
+background =  #101010
+cursorColor=  #b9b9b9
+color0=       #151515
+color8=       #404040
+color1 =      #2aa198
+color9=       #2aa198
+color2=       #505050
+color10=      #505050
+color3 =	  #979696
+color11=      #979696
+color4=       #686868
+color12=      #686868
+color5=       #2aa198
+color13=      #2aa198
+color6 =      #8e8e8e
+color14=      #8e8e8e
+color7=       #b9b9b9
+color15=      #f7f7f7
 
-foreground =                          #eddcd3
-background =                          #1b1b1b
-cursorColor=  #e8daa9
-color0=       #1f1414
-color8=       #ac7339
-color1 =      #CB4C4C
-color9=       #b99d85
-color2=       #339966
-color10=      #d0b081
-color3 =	  #F9D082
-color11=      #996267
-color4=       #eeeeee
-color12=      #d9ca93
-color5=       #b5876d
-color13=      #cba370
-color6 =      #20A2B3
-color14=      #0C7543
-color7=       #e8daa9
-color15=      #bbffbb
-
-
-# extra color definitions for vim
-color40 =							  #CB4C4C
-color41 =							  #B1B1B1
-color42 =							  #666666
+# defining some extra colors for vim colorscheme
+color40=      #00d787
+color41=      #ff6666
+color42=      #797979
+color43=      #ff9966
+color44=      #00cc66
 
 [hints]
 #font = Monospace 12
