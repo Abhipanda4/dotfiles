@@ -26,4 +26,4 @@
 
 ## Setting up other configs
 * Create hard links(or soft links if you wish) to the appropriate locations either in ~/.config/(location) OR ~/(location)
-* termite config resides at: ~/.config/termite/config
+* Example: termite config resides at: ~/.config/termite/config
