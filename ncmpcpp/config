@@ -1,0 +1,96 @@
+# Files
+mpd_music_dir = "~/Music"
+lyrics_directory  = ~/.ncmpcpp/lyrics
+ncmpcpp_directory  = ~/.ncmpcpp
+mpd_host = "localhost"
+mpd_port = "6600"  
+mpd_connection_timeout = "5"  
+mpd_crossfade_time = "5"  
+
+# Playlist
+# how many secs till highlight disappears, disabled if 0
+playlist_disable_highlight_delay = "0"
+message_delay_time = "3"
+playlist_display_mode = "columns"
+playlist_show_remaining_time = "yes"
+
+browser_display_mode = "columns"  
+# Now Playing format for alternative UI
+alternative_header_first_line_format = "$0$aqqu$/a {$7%a - $9}{$2%t$9}|{$8%f$9} $0$atqq$/a$9"
+alternative_header_second_line_format = "{%g}|{{$6%b$9}{ [$6%y$9]}}"
+song_list_format = "{$5%a$9 - }{$2%t$9}|{$8%f$9}$R{$5(%l)$9}"
+song_status_format ="{{%a{ $2//$9 %b{, %y}} $2//$9 }{%t$/b}}|{$b%f$/b}"
+song_library_format = {%n - }{%t}|{%f}
+now_playing_prefix = "$5$2▶ "
+now_playing_suffix = $/b
+#song_columns_list_format = (50)[blue]{t|f:Title} (7f)[magenta]{l}
+song_columns_list_format = "(8f)[black]{l} (30)[red]{a} (30)[default]{t|f}  (30)[blue]{g} "
+user_interface = "alternative"
+default_place_to_search_in = "database"
+startup_screen = "browser"
+discard_colors_if_item_is_selected = "no"
+
+# visualizer
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "my_fifo"
+visualizer_sync_interval = "20"
+visualizer_type = "spectrum" (spectrum/wave)
+visualizer_in_stereo = "yes"
+visualizer_color = 2, 4, 3, 5, 7, 42
+visualizer_look = "◈|"
+
+## Navigation ##
+cyclic_scrolling = "yes"
+header_text_scrolling = "yes"
+jump_to_now_playing_song_at_start = "yes"
+lines_scrolled = "2"
+
+## Other ##
+system_encoding = "utf-8"
+regular_expressions = "extended"
+
+## Selected tracks ##
+selected_item_prefix = "* "
+
+## Seeking ##
+incremental_seeking = "yes"
+seek_time = "5"
+
+## Visibility ##
+header_visibility = "yes"
+statusbar_visibility = "yes"
+titles_visibility = "yes"
+
+
+progressbar_look = "▁▁▁"
+autocenter_mode = "yes"
+centered_cursor = "yes"
+
+# Misc
+display_bitrate = "yes"
+follow_now_playing_lyrics = "yes"
+ignore_leading_the = "yes"
+empty_tag_marker = ""
+
+# colors
+colors_enabled = yes
+empty_tag_color = black
+header_window_color = cyan
+volume_color = yellow
+state_line_color = blue
+state_flags_color = black
+main_window_color = yellow
+color1 = black
+color2 = red
+#main_window_highlight_color = blue
+progressbar_color = 8
+progressbar_elapsed_color = red
+statusbar_color = yellow
+alternative_ui_separator_color = black
+#active_column_color = red
+window_border_color = magenta
+active_window_border = green
+
+
+# experimental
+current_item_prefix = "--> "
