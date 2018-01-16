@@ -1,7 +1,7 @@
 "vim configuration file by Abhisek Panda on Ubuntu 16.04 Vim version 7.4
 
 "###################################################################################################
-"											INDEX
+"                                            INDEX
 "####################################################################################################
 
 
@@ -35,7 +35,7 @@ filetype off
 "1.Plugins:
 "----------------------------------------------------------------------------------------------------
 
-set rtp+=~/.vim/bundle/Vundle.vim/			"set run time path to include vundle
+set rtp+=~/.vim/bundle/Vundle.vim/            "set run time path to include vundle
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'              "let vundle manage vundle,REQUIRED
@@ -48,7 +48,7 @@ Plugin 'lokaltog/vim-easymotion'        "<leader>/ to start search
 
 Plugin 'tpope/vim-surround'             "Surround areas with brackets or quotes******
 
-Plugin 'alvan/vim-closetag'				"html utility
+Plugin 'alvan/vim-closetag'                "html utility
 
 Plugin 'Valloric/YouCompleteMe'
 
@@ -59,7 +59,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 
 call vundle#end()
-filetype plugin indent on				"Add all plugins before this line
+filetype plugin indent on                "Add all plugins before this line
 
 
 "----------------------------------------------------------------------------------------------------
@@ -67,16 +67,16 @@ filetype plugin indent on				"Add all plugins before this line
 "----------------------------------------------------------------------------------------------------
 
 set number
-set rnu									"Relative line numbering
+set rnu                                    "Relative line numbering
 
 "----------------------------------------------------------------------------------------------------
 "3.Advanced Searching:
 "----------------------------------------------------------------------------------------------------
 
-set incsearch							"Google type search
-set hlsearch							"Highlight search results
+set incsearch                            "Google type search
+set hlsearch                            "Highlight search results
 set ignorecase
-set smartcase							"Ignore case unless capital letter is entered
+set smartcase                            "Ignore case unless capital letter is entered
 set wrapscan
 
 
@@ -93,7 +93,7 @@ set ttyfast
 set showmatch
 set nobackup
 set noswapfile
-set hidden		"change buffers without saving
+set hidden        "change buffers without saving
 set splitbelow
 set splitright
 set showcmd
@@ -142,7 +142,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-set noexpandtab
+set expandtab
 
 
 "----------------------------------------------------------------------------------------------------
@@ -154,16 +154,16 @@ set noexpandtab
 set laststatus=2
 set statusline=
 set statusline+=\ <
-set statusline+=\ %f					"Full path to file
-set statusline+=\ >\ %#Style#\   					"Connector
-set statusline+=\ Filetype:%y				"Filetype
-set statusline+=\ \ %r					"readonly flag
-set statusline+=\ \ \ %m				"[+] if change has occured
-set statusline+=%=						"Jump to right side
-set statusline+=\[\ Buf:%n\ \]\ 		"buffer number settings(experimenting)
-set statusline+=%l			"Current line number
-set statusline+=/						"Separator
-set statusline+=%L\ 					"Total lines
+set statusline+=\ %f                    "Full path to file
+set statusline+=\ >\ %#Style#\          "Connector
+set statusline+=\ Filetype:%y           "Filetype
+set statusline+=\ \ %r                  "readonly flag
+set statusline+=\ \ \ %m                "[+] if change has occured
+set statusline+=%=                      "Jump to right side
+set statusline+=\[\ Buf:%n\ \]\         "buffer number settings(experimenting)
+set statusline+=%l                      "Current line number
+set statusline+=/                       "Separator
+set statusline+=%L\                     "Total lines
 
 
 "----------------------------------------------------------------------------------------------------
@@ -176,8 +176,8 @@ set background=dark
 colorscheme wal
 "others:harlequin,candyman,peaksea,molokai,badwolf,candyman
 "jellybeans,gardener
-set scrolloff=12							"Scroll when 6 lines from top or bottom
-set cursorline							"Horizontal highlighting of cursorline
+set scrolloff=12                          "Scroll when 6 lines from top or bottom
+set cursorline                            "Horizontal highlighting of cursorline
 
 
 "----------------------------------------------------------------------------------------------------
@@ -246,11 +246,11 @@ inoremap {<cr> {}<Esc>i<cr><Esc>O
 
 "11.1.Open File In Last Editing Position:
 augroup Entrypoint
-	autocmd!
-	autocmd BufReadPost *
-				\ if line("'\"") > 0 && line("'\"") <= line("$") |
-				\   exe "normal! g`\"" |
-				\ endif
+    autocmd!
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
 augroup END
 
 
@@ -259,20 +259,20 @@ augroup END
 "statusline config
 hi statusline ctermbg=1 ctermfg=16
 
-function! InsertStatuslineColor(mode)			"func to change stl colors on entering insert mode
-	" insert mode
-	if a:mode == 'i'
-		hi Statusline ctermbg=43 ctermfg=16
-	elseif a:mode == 'r'
-		hi Statusline ctermbg=167
-		"replace(shift + r) mode
-	else
-		hi Statusline ctermbg=40
-	endif
+function! InsertStatuslineColor(mode)            "func to change stl colors on entering insert mode
+    " insert mode
+    if a:mode == 'i'
+        hi Statusline ctermbg=43 ctermfg=16
+    elseif a:mode == 'r'
+        hi Statusline ctermbg=167
+        "replace(shift + r) mode
+    else
+        hi Statusline ctermbg=40
+    endif
 endfunction
 
 
-au InsertEnter * call InsertStatuslineColor(v:insertmode)	"call the func on entering insert mode
+au InsertEnter * call InsertStatuslineColor(v:insertmode)    "call the func on entering insert mode
 au InsertLeave * hi statusline ctermbg=1 ctermfg=16
 "on leaving insert mode
 
