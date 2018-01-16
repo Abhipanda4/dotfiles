@@ -6,6 +6,11 @@ case $- in
       *) return;;
 esac
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export BROWSER=firefox
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
@@ -44,11 +49,19 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
+function set_virtualenv () {
+	if [[ -n "$VIRTUAL_ENV" ]]; then
+		venv="$(tput setaf 1) → [venv]"
+	else
+		venv=""
+	fi
+	[[ -n "$venv" ]] && echo "$venv"
+}
 # Prompt
 if [ -n "$SSH_CONNECTION" ]; then
-export PS1="\n\[$(tput setaf 1)\]┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]\n\[$(tput setaf 3)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\]└────╼ \$(parse_git_branch)\\[$(tput setaf 2)\][ssh]\"; else echo \"\[$(tput setaf 1)\]└╼ \[$(tput setaf 2)\][ssh]\"; fi) \[$(tput setaf 4)\]"
+	export PS1="\n\[$(tput setaf 1)\]┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]$(set_virtualenv) \n\[$(tput setaf 3)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\]└────╼ \$(parse_git_branch)\\[$(tput setaf 2)\][ssh]\"; else echo \"\[$(tput setaf 1)\]└╼ \[$(tput setaf 2)\][ssh]\"; fi) \[$(tput setaf 4)\]"
 else
-export PS1="\n\[$(tput setaf 1)\] ┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]\n\[$(tput setaf 1)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\] └────╼\$(parse_git_branch)\"; else echo \"\[$(tput setaf 1)\] └╼\"; fi) \[$(tput setaf 6)\]"
+	export PS1="\n\[$(tput setaf 1)\] ┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]$(set_virtualenv) \n\[$(tput setaf 1)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\] └────╼\$(parse_git_branch)\"; else echo \"\[$(tput setaf 1)\] └╼\"; fi) \[$(tput setaf 6)\]"
 fi
 
 trap 'echo -ne "\e[0m"' DEBUG
@@ -73,20 +86,11 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-export LESS_TERMCAP_mb=$'\e[0;31m'
-export LESS_TERMCAP_md=$'\e[0;34m'
+# man pages
+export LESS_TERMCAP_mb=$'\e[0;33m'
+export LESS_TERMCAP_md=$'\e[0;35m'
 export LESS_TERMCAP_me=$'\e[0m'
 export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[0;34;36m'
+export LESS_TERMCAP_so=$'\e[1;34;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[0;35m'
-
-#export LS_COLORS='ex=4;92:fi=2;37'
-
-# added by Miniconda3 4.3.21 installer
-export PATH="/home/abhipanda/miniconda3/bin:$PATH"
-
-export CUDA_HOME=/usr/local/cuda-8.0
-export LD_LIBRARY_PATH=${CUDA_HOME}/lib64
-PATH=${CUDA_HOME}/bin/:${PATH}
-export PATH
+export LESS_TERMCAP_us=$'\e[0;31m'
