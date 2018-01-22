@@ -253,7 +253,6 @@ augroup Entrypoint
                 \ endif
 augroup END
 
-
 "11.2.Statatusline Color:
 
 "statusline config
@@ -292,7 +291,8 @@ hi statuslineNC ctermbg=3 ctermfg=16
 hi BufTabLineActive ctermbg=3 ctermfg=232
 hi BufTabLineCurrent ctermbg=1 ctermfg=232
 hi Matchparen ctermbg=41 ctermfg=232
-hi cursorline ctermbg=233
+hi cursorline ctermbg=45 ctermfg=None
+hi Todo ctermbg=41 ctermfg=255
 
 "11.5. Trailing White Spaces and Leading Tab characters
 hi ExtraWhiteSpace ctermbg=41
@@ -303,8 +303,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-" 12. Plugin Settings
 
+" 12. Plugin Settings
 "12.1. CtrlP
 let g:ctrlp_by_filename = 1
 
