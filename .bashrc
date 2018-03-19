@@ -6,6 +6,7 @@ case $- in
       *) return;;
 esac
 
+export TERM=xterm
 export VISUAL=vim
 export EDITOR="$VISUAL"
 export BROWSER=firefox
@@ -49,31 +50,24 @@ parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-function set_virtualenv () {
-	if [[ -n "$VIRTUAL_ENV" ]]; then
-		venv="$(tput setaf 1) → [venv]"
-	else
-		venv=""
-	fi
-	[[ -n "$venv" ]] && echo "$venv"
+function set_virtualenv {
+    if [ x"$VIRTUAL_ENV" == x ]
+    then
+        venv=""
+    else
+        venv="$(tput setaf 1) → [venv]"
+    fi
+	echo "$venv"
 }
+
 # Prompt
 if [ -n "$SSH_CONNECTION" ]; then
 	export PS1="\n\[$(tput setaf 1)\]┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]$(set_virtualenv) \n\[$(tput setaf 3)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\]└────╼ \$(parse_git_branch)\\[$(tput setaf 2)\][ssh]\"; else echo \"\[$(tput setaf 1)\]└╼ \[$(tput setaf 2)\][ssh]\"; fi) \[$(tput setaf 4)\]"
 else
-	export PS1="\n\[$(tput setaf 1)\] ┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]$(set_virtualenv) \n\[$(tput setaf 1)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\] └────╼\$(parse_git_branch)\"; else echo \"\[$(tput setaf 1)\] └╼\"; fi) \[$(tput setaf 6)\]"
+	export PS1="\n\[$(tput setaf 1)\] ┌─╼ [abhipanda]╺─╸\[$(tput setaf 3)\][\w]`set_virtualenv` \n\[$(tput setaf 1)\]\$(if [[ \$? == 0 ]]; then echo \"\[$(tput setaf 1)\] └────╼\$(parse_git_branch)\"; else echo \"\[$(tput setaf 1)\] └╼\"; fi) \[$(tput setaf 6)\]"
 fi
 
 trap 'echo -ne "\e[0m"' DEBUG
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 # Color support
 if [ -x /usr/bin/dircolors ]; then
@@ -94,3 +88,6 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[1;34;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[0;31m'
+
+# added by Miniconda3 installer
+export PATH="/home/abhipanda/miniconda3/bin:$PATH"

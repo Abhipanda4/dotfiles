@@ -17,3 +17,6 @@ alias gpush="git push origin master"
 mkcd () {
 	mkdir $1 && cd $1
 }
+
+# Misc.
+alias sudo="sudo -E"

@@ -35,28 +35,28 @@ filetype off
 "1.Plugins:
 "----------------------------------------------------------------------------------------------------
 
-set rtp+=~/.vim/bundle/Vundle.vim/            "set run time path to include vundle
+set rtp+=~/.vim/bundle/Vundle.vim/        " set run time path to include vundle
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'              "let vundle manage vundle,REQUIRED
+Plugin 'gmarik/Vundle.vim'                " let vundle manage vundle,REQUIRED
 
-Plugin 'flazz/vim-colorschemes'         "All in 1 colorscheme pack
+Plugin 'flazz/vim-colorschemes'           " All in 1 colorscheme pack
 
-Plugin 'scrooloose/nerdcommenter'       "<leader>ci to toggle comment a line
+Plugin 'scrooloose/nerdcommenter'         " <leader>ci to toggle comment a line
 
-Plugin 'lokaltog/vim-easymotion'        "<leader>/ to start search
+Plugin 'octol/vim-cpp-enhanced-highlight' " Advances syntax highlighting for cpp
 
-Plugin 'tpope/vim-surround'             "Surround areas with brackets or quotes******
+Plugin 'Valloric/YouCompleteMe'           " the ultimate auto complete
 
-Plugin 'alvan/vim-closetag'                "html utility
+Plugin 'ap/vim-buftabline'                " easy management of open buffers
 
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ctrlpvim/ctrlp.vim'               " to search files easily
 
-Plugin 'ap/vim-buftabline'
+Plugin 'godlygeek/tabular'                " for aligning text
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'itchyny/lightline.vim'
 
-Plugin 'godlygeek/tabular'
+Plugin 'rhysd/clever-f.vim'               " use f, t, F, T more conveniently
 
 call vundle#end()
 filetype plugin indent on                "Add all plugins before this line
@@ -73,10 +73,10 @@ set rnu                                    "Relative line numbering
 "3.Advanced Searching:
 "----------------------------------------------------------------------------------------------------
 
-set incsearch                            "Google type search
-set hlsearch                            "Highlight search results
+set incsearch  " search incrementally
+set hlsearch   " Highlight search results
 set ignorecase
-set smartcase                            "Ignore case unless capital letter is entered
+set smartcase  " Ignore case unless capital letter is entered
 set wrapscan
 
 
@@ -87,7 +87,7 @@ set wrapscan
 
 set wildmenu
 set wildmode=list:longest,full
-"no redrawing when exeecuting macros
+"no redrawing when executing macros
 set lazyredraw
 set ttyfast
 set showmatch
@@ -116,7 +116,7 @@ nnoremap k gk
 nnoremap H ^
 nnoremap L g_
 nnoremap \ i<space><Esc>
-"Disable the arrow keys for familiarization with vim movements"
+"Disable the arrow keys for good :)
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 inoremap <Right> <NOP>
@@ -148,22 +148,8 @@ set expandtab
 "----------------------------------------------------------------------------------------------------
 "7.Statusline
 "----------------------------------------------------------------------------------------------------
-
-"My own vim-airline
-
 set laststatus=2
-set statusline=
-set statusline+=\ <
-set statusline+=\ %f                    "Full path to file
-set statusline+=\ >\ %#Style#\          "Connector
-set statusline+=\ Filetype:%y           "Filetype
-set statusline+=\ \ %r                  "readonly flag
-set statusline+=\ \ \ %m                "[+] if change has occured
-set statusline+=%=                      "Jump to right side
-set statusline+=\[\ Buf:%n\ \]\         "buffer number settings(experimenting)
-set statusline+=%l                      "Current line number
-set statusline+=/                       "Separator
-set statusline+=%L\                     "Total lines
+set showtabline=2
 
 
 "----------------------------------------------------------------------------------------------------
@@ -176,7 +162,7 @@ set background=dark
 colorscheme wal
 "others:harlequin,candyman,peaksea,molokai,badwolf,candyman
 "jellybeans,gardener
-set scrolloff=12                          "Scroll when 6 lines from top or bottom
+set scrolloff=12                          "Scroll when 12 lines from top or bottom
 set cursorline                            "Horizontal highlighting of cursorline
 
 
@@ -204,10 +190,6 @@ nnoremap <leader><leader>, <esc>mxggvG=`x
 "---------------------------------------------
 nnoremap <leader>h :nohlsearch<cr>
 "to unhighlight the search matches
-
-nmap <leader>/ <leader><leader>s
-"find a word by its first letter-- using easymotion plugin"
-imap <leader>/ <esc><leader><leader>s
 
 vnoremap <leader>t :Tabularize /
 "tabularise plugin
@@ -254,27 +236,22 @@ augroup Entrypoint
 augroup END
 
 "11.2.Statatusline Color:
-
 "statusline config
-hi statusline ctermbg=1 ctermfg=16
-
-function! InsertStatuslineColor(mode)            "func to change stl colors on entering insert mode
-    " insert mode
-    if a:mode == 'i'
-        hi Statusline ctermbg=43 ctermfg=16
-    elseif a:mode == 'r'
-        hi Statusline ctermbg=167
-        "replace(shift + r) mode
-    else
-        hi Statusline ctermbg=40
-    endif
-endfunction
-
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)    "call the func on entering insert mode
-au InsertLeave * hi statusline ctermbg=1 ctermfg=16
-"on leaving insert mode
-
+let g:lightline = {
+    \ 'colorscheme' : 'wombat',
+    \ 'active' : {
+        \ 'left' : [ [ 'mode', 'paste' ],
+        \           [ 'readonly', 'relativepath', 'modified'] ],
+        \ 'right' : [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
+        \},
+    \ 'inactive' : {
+        \ 'left' : [ ['relativepath'], ['modified'] ]
+        \},
+    \ 'component' : {
+        \ 'lineinfo': "%{line('.') . '/' . line('$')}",
+        \},
+    \ 'enable' : {'statusline' : 1, 'tabline' : 0}
+    \}
 
 "11.3.Timeouts:
 
@@ -286,11 +263,10 @@ set ttimeoutlen=0
 hi IncSearch ctermbg=40 ctermfg=232
 hi Search ctermbg=166 ctermfg=232
 hi Wildmenu ctermfg=16 ctermbg=255 cterm=bold
-hi Style ctermbg=16 ctermfg=255
 hi statuslineNC ctermbg=3 ctermfg=16
 hi BufTabLineActive ctermbg=3 ctermfg=232
 hi BufTabLineCurrent ctermbg=1 ctermfg=232
-hi Matchparen ctermbg=41 ctermfg=232
+hi Matchparen ctermbg=196 ctermfg=190
 hi cursorline ctermbg=45 ctermfg=None
 hi Todo ctermbg=41 ctermfg=255
 
@@ -311,3 +287,7 @@ let g:ctrlp_by_filename = 1
 "12.2 vim buftabline configurations
 let g:buftabline_numbers=2
 let g:buftabline_indicators=1
+
+"12.3 YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_collect_identifiers_from_comments_and_strings=1
