@@ -14,21 +14,21 @@ message_delay_time = "3"
 playlist_display_mode = "columns"
 playlist_show_remaining_time = "yes"
 
-browser_display_mode = "columns"  
+browser_display_mode = "columns"
 # Now Playing format for alternative UI
 alternative_header_first_line_format = "$0$aqqu$/a {$7%a - $9}{$2%t$9}|{$8%f$9} $0$atqq$/a$9"
 alternative_header_second_line_format = "{%g}|{{$6%b$9}{ [$6%y$9]}}"
-song_list_format = "{$5%a$9 - }{$2%t$9}|{$8%f$9}$R{$5(%l)$9}"
+song_list_format = "{$5%a$9 - }{$2%t$9}|{$8%f$9}$9"
 song_status_format ="{{%a{ $2//$9 %b{, %y}} $2//$9 }{%t$/b}}|{$b%f$/b}"
-song_library_format = {%n - }{%t}|{%f}
-now_playing_prefix = "$5$2▶ "
-now_playing_suffix = $/b
-#song_columns_list_format = (50)[blue]{t|f:Title} (7f)[magenta]{l}
-song_columns_list_format = "(8f)[black]{l} (30)[red]{a} (30)[default]{t|f}  (30)[blue]{g} "
+song_library_format = "{%t}|{%f}"
+
+song_columns_list_format = "(5)[black]{n} (5)[black]{l} (30)[red]{a} (30)[default]{t|f}  (30)[blue]{g} "
 user_interface = "alternative"
 default_place_to_search_in = "database"
 startup_screen = "browser"
-discard_colors_if_item_is_selected = "no"
+discard_colors_if_item_is_selected = "yes"
+
+now_playing_prefix = "$b"
 
 # visualizer
 visualizer_fifo_path = "/tmp/mpd.fifo"
@@ -64,7 +64,7 @@ titles_visibility = "yes"
 
 progressbar_look = "▁▁▁"
 autocenter_mode = "yes"
-centered_cursor = "yes"
+centered_cursor = "no"
 
 # Misc
 display_bitrate = "yes"
@@ -93,4 +93,5 @@ active_window_border = green
 
 
 # experimental
-current_item_prefix = "--> "
+current_item_prefix = " 🡆 "
+current_item_suffix = "$9"
