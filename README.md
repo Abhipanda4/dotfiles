@@ -27,3 +27,8 @@
 ## Setting up other configs
 * Create hard links(or soft links if you wish) to the appropriate locations either in ~/.config/(location) OR ~/(location)
 * Example: termite config resides at: ~/.config/termite/config
+
+## Screenshots
+
+![image1](./img1.png)
+![image2](./img2.png)
