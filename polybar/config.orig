@@ -1,0 +1,189 @@
+[colors]
+black = #111
+
+
+[bar/top]
+monitor = eDP-1
+width = 100%
+height = 34
+
+background = ${colors.black}
+foreground = #ccffffff
+
+line-color = #00000000
+line-size = 2
+
+spacing = 2
+padding = 5
+module-margin = 4
+
+font-0 = NotoSans-Regular:size=9;-1
+font-1 = MaterialIcons:size=10;0
+font-2 = Termsynu:size=8:antialias=false;-2
+font-3 = FontAwesome:size=10;0
+
+modules-left = i3 powermenu mpd
+modules-right = cpu memory backlight volume wireless-network wired-network battery date
+
+[module/backlight]
+type = internal/xbacklight
+format = <label> <bar>
+
+label = 
+bar-width = 8
+bar-indicator = |
+bar-indicator-font = 3
+bar-indicator-foreground = #ff
+bar-fill = ─
+bar-fill-font = 3
+bar-fill-foreground = #2aa198
+bar-empty = ─
+bar-empty-font = 3
+bar-empty-foreground = #44
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ACAD
+full-at = 98
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #f53c3c
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = #ffa900
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+
+[module/i3]
+type = internal/i3
+strip-wsnumbers = true
+wrapping-scroll = false
+
+label-focused =%name%
+label-focused-foreground = #2aa198
+label-focused-background = #222222
+label-focused-overline = #2aa198
+label-focused-padding = 5
+
+label-unfocused =%name%
+label-unfocused-padding = 5
+
+label-visible =%name%
+label-visible-padding = 5
+
+label-urgent =%name%
+label-urgent-background = #ff6666
+label-urgent-foreground = #ffffff
+label-urgent-padding = 5
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label>
+label =   %percentage%%
+
+[module/date]
+type = internal/date
+date = %%{F#99}%d %b %Y%%{F-}    %%{F#fff}%I:%M %p%%{F-}
+date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+label = 
+
+bar-used-width = 8
+bar-used-foreground-0 = #2aa198
+bar-used-foreground-1 = #af1000
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = #444444
+
+[module/mpd]
+type = internal/mpd
+format-online = <bar-progress> <label-time> <label-song>
+
+bar-progress-width = 20
+bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
+bar-progress-indicator = |
+bar-progress-indicator-foreground = #ff
+bar-progress-indicator-font = 3
+bar-progress-fill = ─
+bar-progress-fill-foreground = #2aa198
+bar-progress-fill-font = 3
+bar-progress-empty = ─
+bar-progress-empty-font = 3
+bar-progress-empty-foreground = #44
+
+label-time-foreground = #2aa198
+
+[module/wireless-network]
+type = internal/network
+interface = wlp8s0
+interval = 3.0
+ping-interval = 50
+
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+label-disconnected =   Not Connected
+label-disconnected-foreground = #66
+
+ramp-signal-0 = 
+
+[module/wired-network]
+type = internal/network
+interface = enp9s0
+interval = 3.0
+
+; add label b4 connected when available
+label-connected = %{T3}%local_ip%%{T-}
+label-disconnected-foreground = #66
+
+[module/volume]
+type = internal/pulseaudio
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
+mapped = true
+
+format-volume = <label-volume> <bar-volume>
+label-volume = 
+label-muted =    Mute
+label-muted-foreground = #ff6666
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+
+bar-volume-width = 8
+bar-volume-foreground-0 = #2aa198
+bar-volume-foreground-1 = #af1000
+bar-volume-indicator = |
+bar-volume-indicator-font = 6
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = ─
+bar-volume-fill-font = 6
+bar-volume-empty = ─
+bar-volume-empty-font = 6
+bar-volume-empty-foreground = #444444
+
+[module/clock]
+type = internal/date
+interval = 2
+date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
