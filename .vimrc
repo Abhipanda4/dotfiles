@@ -103,6 +103,8 @@ set showcmd
 "5.Key Bindings
 "----------------------------------------------------------------------------------------------------
 
+set pastetoggle=<F5>
+
 nnoremap ; :
 vnoremap ; :
 nnoremap : ;
@@ -131,6 +133,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+"set highlight results in middle of window
+nnoremap n nzz
+nnoremap N Nzz
 
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
@@ -291,3 +297,7 @@ let g:buftabline_indicators=1
 "12.3 YouCompleteMe
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_collect_identifiers_from_comments_and_strings=1
+
+"12.4 Clever-f
+let g:clever_f_across_no_line = 1
+let g:clever_f_timeout_ms=2000
