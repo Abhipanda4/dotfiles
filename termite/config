@@ -70,13 +70,14 @@ color7  = #b9b9b9
 color15 = #f7f7f7
 
 # defining some extra colors for vim colorscheme
-color40=      #00d787
-color41=      #ff6666
-color42=      #797979
-color43=      #ff9966
-color44=      #00cc66
-color45=      #181818
-color46=      #212121
+color40= #00d787
+color41= #ff6666
+color42= #797979
+color43= #ff9966
+color44= #00cc66
+color45= #181818
+color46= #212121
+color47= #ffc2c2
 
 [hints]
 #font = Monospace 12
