@@ -38,25 +38,25 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/        " set run time path to include vundle
 call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'                " let vundle manage vundle,REQUIRED
-
-Plugin 'flazz/vim-colorschemes'           " All in 1 colorscheme pack
-
-Plugin 'scrooloose/nerdcommenter'         " <leader>ci to toggle comment a line
-
-Plugin 'octol/vim-cpp-enhanced-highlight' " Advances syntax highlighting for cpp
-
 Plugin 'Valloric/YouCompleteMe'           " the ultimate auto complete
 
 Plugin 'ap/vim-buftabline'                " easy management of open buffers
 
 Plugin 'ctrlpvim/ctrlp.vim'               " to search files easily
 
+Plugin 'flazz/vim-colorschemes'           " All in 1 colorscheme pack
+
+Plugin 'gmarik/Vundle.vim'                " let vundle manage vundle,REQUIRED
+
 Plugin 'godlygeek/tabular'                " for aligning text
 
-Plugin 'itchyny/lightline.vim'
+Plugin 'itchyny/lightline.vim'            " lightweight statusbar for vim
+
+Plugin 'octol/vim-cpp-enhanced-highlight' " Advances syntax highlighting for cpp
 
 Plugin 'rhysd/clever-f.vim'               " use f, t, F, T more conveniently
+
+Plugin 'scrooloose/nerdcommenter'         " <leader>ci to toggle comment a line
 
 call vundle#end()
 filetype plugin indent on                "Add all plugins before this line
@@ -275,6 +275,7 @@ hi BufTabLineCurrent ctermbg=1 ctermfg=232
 hi Matchparen ctermbg=196 ctermfg=190
 hi cursorline ctermbg=45 ctermfg=None
 hi Todo ctermbg=41 ctermfg=255
+hi comment ctermbg=233 ctermfg=132
 
 "11.5. Trailing White Spaces and Leading Tab characters
 hi ExtraWhiteSpace ctermbg=41
