@@ -17,6 +17,10 @@ spacing = 2
 padding = 5
 module-margin = 4
 
+tray-detached = false
+tray-position = right
+tray-padding = 2
+
 font-0 = NotoSans-Regular:size=9;-1
 font-1 = MaterialIcons:size=10;0
 font-2 = Termsynu:size=8:antialias=false;-2
@@ -31,8 +35,8 @@ format = <label> <bar>
 
 label = 
 bar-width = 8
-bar-indicator = |
-bar-indicator-font = 3
+bar-indicator = 
+bar-indicator-font = 1
 bar-indicator-foreground = #ff
 bar-fill = ─
 bar-fill-font = 3
@@ -101,20 +105,8 @@ date-alt = %%{F#fff}%A, %d %B %Y  %%{F#fff}%H:%M%%{F#666}:%%{F#fba922}%S%%{F-}
 
 [module/memory]
 type = internal/memory
-format = <label> <bar-used>
-label = 
-
-bar-used-width = 8
-bar-used-foreground-0 = #2aa198
-bar-used-foreground-1 = #af1000
-bar-used-indicator = |
-bar-used-indicator-font = 6
-bar-used-indicator-foreground = #ff
-bar-used-fill = ─
-bar-used-fill-font = 6
-bar-used-empty = ─
-bar-used-empty-font = 6
-bar-used-empty-foreground = #444444
+format = <label>
+label =    %gb_used%
 
 [module/mpd]
 type = internal/mpd
@@ -122,9 +114,9 @@ format-online = <bar-progress> <label-time> <label-song>
 
 bar-progress-width = 20
 bar-progress-format = %{A4:mpdseek+2: A5:mpdseek-2:}%fill%%indicator%%empty%%{A A}
-bar-progress-indicator = |
+bar-progress-indicator = 
 bar-progress-indicator-foreground = #ff
-bar-progress-indicator-font = 3
+bar-progress-indicator-font = 1
 bar-progress-fill = ─
 bar-progress-fill-foreground = #2aa198
 bar-progress-fill-font = 3
@@ -173,9 +165,8 @@ ramp-volume-1 = 
 
 bar-volume-width = 8
 bar-volume-foreground-0 = #2aa198
-bar-volume-foreground-1 = #af1000
-bar-volume-indicator = |
-bar-volume-indicator-font = 6
+bar-volume-indicator = 
+bar-volume-indicator-font = 5
 bar-volume-indicator-foreground = #ff
 bar-volume-fill = ─
 bar-volume-fill-font = 6
