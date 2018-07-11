@@ -15,8 +15,10 @@ export LESS_TERMCAP_us=$'\e[0;31m'
 # added by Miniconda3 installer
 export PATH="/home/abhipanda/miniconda3/bin:$PATH"
 
+export PATH="/home/abhipanda/.gem/ruby/2.5.0/bin:$PATH"
+
 # Set name of the theme to load.
-ZSH_THEME="agnoster"
+ZSH_THEME="refined"
 
 CASE_SENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
@@ -40,11 +42,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim'
-fi
+export EDITOR='vim'
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -55,9 +53,6 @@ alias c="clear"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-
-# update packages
-alias pacup="sudo pacman -Syu"
 
 # basic git usage
 alias ga="git add"
@@ -72,3 +67,7 @@ mkcd () {
 
 # Misc.
 alias sudo="sudo -E"
+
+alias ls="colorls"
+alias ll="colorls -l"
+alias la="colorls -a"
