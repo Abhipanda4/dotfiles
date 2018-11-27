@@ -1,9 +1,8 @@
-"vim configuration file by Abhisek Panda on Ubuntu 16.04 Vim version 7.4
+"vim configuration file by Abhisek Panda on Manjaro 17.1.6 Vim version 8.0
 
 "###################################################################################################
 "                                            INDEX
 "####################################################################################################
-
 
 " 0  - NECESSARY REQUIREMENTS
 " 1  - PLUGINS
@@ -17,7 +16,7 @@
 " 9  - LEADER KEY
 " 10 - AUTO COMPLETION
 " 11 - MISCELLANEOUS
-
+" 12 - PLUGIN SETTINGS
 
 "####################################################################################################
 
@@ -38,8 +37,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/        " set run time path to include vundle
 call vundle#begin()
 
-Plugin 'Valloric/YouCompleteMe'           " the ultimate auto complete
-
 Plugin 'ap/vim-buftabline'                " easy management of open buffers
 
 Plugin 'ctrlpvim/ctrlp.vim'               " to search files easily
@@ -57,6 +54,8 @@ Plugin 'octol/vim-cpp-enhanced-highlight' " Advances syntax highlighting for cpp
 Plugin 'rhysd/clever-f.vim'               " use f, t, F, T more conveniently
 
 Plugin 'scrooloose/nerdcommenter'         " <leader>ci to toggle comment a line
+
+Plugin 'valloric/YouCompleteMe'           " the ultimate auto complete
 
 call vundle#end()
 filetype plugin indent on                "Add all plugins before this line
@@ -91,6 +90,8 @@ set wildmode=list:longest,full
 set lazyredraw
 set ttyfast
 set showmatch
+" add angular brackets to match with %
+set matchpairs+=<:>
 set nobackup
 set noswapfile
 set hidden        "change buffers without saving
@@ -105,19 +106,23 @@ set showcmd
 
 set pastetoggle=<F5>
 
+"interchange : and ;
 nnoremap ; :
 vnoremap ; :
 nnoremap : ;
 vnoremap : ;
-"for using next in character search"
+
+"enable backspace
 nnoremap <bs> i<bs><esc>l
+"use enter key for adding blank lines
 nnoremap <cr> o<esc>
+"Natural movement in case of wrapped lines;NO skipping
 nnoremap j gj
 nnoremap k gk
-"Natural movement in case of wrapped lines;NO skipping
-nnoremap H ^
+"sensible line navigation
+nnoremap H g^
 nnoremap L g_
-nnoremap \ i<space><Esc>
+
 "Disable the arrow keys for good :)
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
@@ -138,10 +143,13 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap n nzz
 nnoremap N Nzz
 
+"Enable resaving a file as root with sudo
+cmap w!! w !sudo tee % >/dev/null
+
+
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
 "----------------------------------------------------------------------------------------------------"
-
 
 set autoindent
 set smarttab
@@ -156,6 +164,7 @@ set expandtab
 "----------------------------------------------------------------------------------------------------
 set laststatus=2
 set showtabline=2
+
 
 
 "----------------------------------------------------------------------------------------------------
@@ -209,6 +218,7 @@ nnoremap <leader>j :bp<cr>
 nnoremap <leader>k :bn<cr>
 "to go to the next buffer(vim up)
 
+" vimbuftabline settings
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
 nmap <leader>3 <Plug>BufTabLine.Go(3)
@@ -241,8 +251,52 @@ augroup Entrypoint
                 \ endif
 augroup END
 
-"11.2.Statatusline Color:
-"statusline config
+"11.2.Timeouts:
+
+set timeoutlen=1000
+set ttimeoutlen=0
+
+"11.3.Custom Color-modes
+
+hi IncSearch ctermbg=40 ctermfg=232
+hi Search ctermbg=166 ctermfg=232
+hi Wildmenu ctermfg=16 ctermbg=255 cterm=bold
+hi statuslineNC ctermbg=3 ctermfg=16
+hi cursorline ctermbg=232
+hi BufTabLineActive ctermbg=3 ctermfg=232
+hi BufTabLineCurrent ctermbg=1 ctermfg=232
+hi Matchparen ctermbg=196 ctermfg=190
+hi Todo ctermbg=41 ctermfg=255
+hi comment ctermbg=233 ctermfg=132
+
+"11.4. Trailing White Spaces and Leading Tab characters
+hi ExtraWhiteSpace ctermbg=41
+
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
+"----------------------------------------------------------------------------------------------------
+"12. Plugin Settings
+"----------------------------------------------------------------------------------------------------
+
+"12.1. CtrlP
+let g:ctrlp_by_filename = 1
+
+"12.2. vim buftabline configurations
+let g:buftabline_numbers=2
+let g:buftabline_indicators=1
+
+"12.3. YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_collect_identifiers_from_comments_and_strings=1
+let g:ycm_autoclose_preview_window_after_completion=0
+
+"12.4. Clever-f
+let g:clever_f_across_no_line = 1
+let g:clever_f_timeout_ms=2000
+
+"12.5. Lightline config for statusline
 let g:lightline = {
     \ 'colorscheme' : 'wombat',
     \ 'active' : {
@@ -259,46 +313,4 @@ let g:lightline = {
     \ 'enable' : {'statusline' : 1, 'tabline' : 0}
     \}
 
-"11.3.Timeouts:
-
-set timeoutlen=1000
-set ttimeoutlen=0
-
-"11.4.Custom Color-modes
-
-hi IncSearch ctermbg=40 ctermfg=232
-hi Search ctermbg=166 ctermfg=232
-hi Wildmenu ctermfg=16 ctermbg=255 cterm=bold
-hi statuslineNC ctermbg=3 ctermfg=16
-hi BufTabLineActive ctermbg=3 ctermfg=232
-hi BufTabLineCurrent ctermbg=1 ctermfg=232
-hi Matchparen ctermbg=196 ctermfg=190
-hi cursorline ctermbg=45 ctermfg=None
-hi Todo ctermbg=41 ctermfg=255
-hi comment ctermbg=233 ctermfg=132
-
-"11.5. Trailing White Spaces and Leading Tab characters
-hi ExtraWhiteSpace ctermbg=41
-
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-
-" 12. Plugin Settings
-"12.1. CtrlP
-let g:ctrlp_by_filename = 1
-
-"12.2 vim buftabline configurations
-let g:buftabline_numbers=2
-let g:buftabline_indicators=1
-
-"12.3 YouCompleteMe
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_collect_identifiers_from_comments_and_strings=1
-
-"12.4 Clever-f
-let g:clever_f_across_no_line = 1
-let g:clever_f_timeout_ms=2000
+let g:python_highlight_all = 1
