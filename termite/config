@@ -1,9 +1,7 @@
 [options]
-#allow_bold = true
-#audible_bell = false
-#clickable_url = true
+allow_bold = false
+clickable_url = true
 #dynamic_title = true
-#font = Monospace 12
 font = Monospace 10.5
 #fullscreen = true
 #geometry = 640x480
@@ -40,18 +38,12 @@ scrollback_lines = 10000
 #scrollbar = off
 
 [colors]
-# If both of these are unset, cursor falls back to the foreground color,
-# and cursor_foreground falls back to the background color.
-#cursor = #777777
-#cursor_foreground = #dcdccc
 
-# 20% background transparency (requires a compositor)
-
-# If unset, will reverse foreground and background
 highlight =   #444444
 foreground =  #b9b9b9
 background =  #101010
 cursorColor=  #b9b9b9
+
 color0  = #151515
 color8  = #404040
 color1  = #2aa198
@@ -78,16 +70,3 @@ color44= #00cc66
 color45= #181818
 color46= #212121
 color47= #ffc2c2
-
-[hints]
-#font = Monospace 12
-#foreground = #dcdccc
-#background = #3f3f3f
-#active_foreground = #e68080
-#active_background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
-
-# vim: ft=dosini cms=#%s

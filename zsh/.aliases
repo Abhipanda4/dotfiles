@@ -1,0 +1,23 @@
+alias e="exit"
+alias c="clear"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+# update packages
+alias paci="sudo pacman -S --noconfirm" # pacman install
+alias pacs="sudo pacman -Ss" # pacman search
+alias pacr="sudo pacman -Rns" # pacman remove
+
+# basic git usage
+alias gs="git status"
+alias gc="git commit -m"
+alias gpush="git push origin master"
+
+# make dir and cd into it
+mkcd () {
+	mkdir $1 && cd $1
+}
+
+# Misc.
+alias sudo="sudo -E"
