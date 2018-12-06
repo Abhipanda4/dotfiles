@@ -27,7 +27,9 @@ tray-padding = 2
 font-0 = NotoSans-Regular:size=9;-1
 font-1 = MaterialIcons:size=10;0
 font-2 = Termsynu:size=8:antialias=false;-2
-font-3 = FontAwesome:size=10;0
+font-3 = Font Awesome 5 Free:pixelsize=10;0
+font-4 = Font Awesome 5 Free Solid:pixelsize=10;0
+font-5 = Font Awesome 5 Brands:pixelsize=10;0
 
 modules-left = i3 mpd
 modules-right = xkeyboard cpu memory backlight volume wireless-network wired-network battery date
@@ -144,7 +146,7 @@ format-padding = 3
 ; Modules on left
 [module/i3]
 type = internal/i3
-strip-wsnumbers = true
+strip-wsnumbers = false
 wrapping-scroll = false
 
 label-focused =%name%
