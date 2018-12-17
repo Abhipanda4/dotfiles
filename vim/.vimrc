@@ -14,7 +14,7 @@
 " 7  - STATUSLINE
 " 8  - DISPLAY
 " 9  - LEADER KEY
-" 10 - AUTO COMPLETION
+" 10 - INSERT MODE TRICKS
 " 11 - MISCELLANEOUS
 " 12 - PLUGIN SETTINGS
 
@@ -40,7 +40,7 @@ Plugin 'ctrlpvim/ctrlp.vim'               " to search files easily
 
 Plugin 'flazz/vim-colorschemes'           " All in 1 colorscheme pack
 
-Plugin 'gmarik/Vundle.vim'                " let vundle manage vundle,REQUIRED
+Plugin 'gmarik/Vundle.vim'                " manage plugins easily
 
 Plugin 'godlygeek/tabular'                " for aligning text
 
@@ -56,19 +56,21 @@ Plugin 'mileszs/ack.vim'                  " Search for keywords from within vim
 
 Plugin 'vim-python/python-syntax'         " advanced syntax highlighting for python
 
-Plugin 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'                " for a quick overview of code and quick nav
+
+Plugin 'skywind3000/asyncrun.vim'         " Asynchronously execute cmds, no need to leave vim anymore
 
 "Plugin 'valloric/YouCompleteMe'
-call vundle#end()
-filetype plugin indent on                "Add all plugins before this line
 
+call vundle#end()
+filetype plugin indent on       "Add all plugins before this line
 
 "----------------------------------------------------------------------------------------------------
 "2.Line Structure:
 "----------------------------------------------------------------------------------------------------
 
 set number
-set rnu                                    "Relative line numbering
+set rnu         "Relative line numbering
 
 "----------------------------------------------------------------------------------------------------
 "3.Advanced Searching:
@@ -79,8 +81,7 @@ set hlsearch   " Highlight search results
 set ignorecase
 set smartcase  " Ignore case unless capital letter is entered
 set wrapscan
-
-
+set linebreak
 
 "---------------------------------------------------------------------------------------------------
 "4.UserInterface Settings:
@@ -124,7 +125,6 @@ set splitright
 set nobackup
 set noswapfile
 set nowb
-
 
 "----------------------------------------------------------------------------------------------------
 "5.Key Bindings
@@ -180,7 +180,6 @@ cmap cd. lcd %:p:h
 vnoremap < <gv
 vnoremap > >gv
 
-
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
 "----------------------------------------------------------------------------------------------------"
@@ -192,14 +191,12 @@ set tabstop=4
 set softtabstop=4
 set expandtab
 
-
 "----------------------------------------------------------------------------------------------------
 "7.Statusline
 "----------------------------------------------------------------------------------------------------
 set laststatus=2
 set showtabline=2
 "see buftabline config for statusline
-
 
 "----------------------------------------------------------------------------------------------------
 "8.Display
@@ -213,7 +210,6 @@ colorscheme wal
 "jellybeans,gardener
 set scrolloff=12                          "Scroll when 12 lines from top or bottom
 set cursorline                            "Horizontal highlighting of cursorline
-
 
 "----------------------------------------------------------------------------------------------------
 "9.Leader Key
@@ -256,13 +252,15 @@ nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
 
-
 "----------------------------------------------------------------------------------------------------
-"10.Auto-Completion
+"10.Insert Mode Tricks
 "----------------------------------------------------------------------------------------------------
 
+" for c style languages, autocomplete {
 inoremap {<cr> {}<Esc>i<cr><Esc>O
 
+" change the current word to upper case
+inoremap <c-u> <Esc>mzviwU`za
 
 "----------------------------------------------------------------------------------------------------
 "11.Miscellaneous
@@ -299,10 +297,12 @@ hi ctrlp_hi_2 ctermbg=2 ctermfg=6
 
 "11.4. Trailing White Spaces and Leading Tab characters
 hi ExtraWhiteSpace ctermbg=41
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-
+augroup whitespace
+    autocmd!
+    autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+augroup END
 
 "----------------------------------------------------------------------------------------------------
 "12. Plugin Settings
@@ -377,3 +377,12 @@ let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 hi TagbarHighlight ctermbg=44 ctermfg=232
+
+"12.8 Async
+"open quickfix window automatically when something adds to it
+augroup async_quickfix
+    autocmd QuickFixCmdPost * botright copen 20
+augroup END
+
+"see real time python output
+let $PYTHONUNBUFFERED=1
