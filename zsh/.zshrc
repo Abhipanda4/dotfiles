@@ -14,7 +14,7 @@ export LESS_TERMCAP_us=$'\e[0;31m'
 
 # added by Miniconda3 installer
 export PATH="/home/abhipanda/miniconda3/bin:$PATH"
-export PATH="/home/abhipanda/.gem/ruby/2.5.0/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 # Set name of the theme to load.
 ZSH_THEME="refined_panda"
@@ -39,7 +39,7 @@ source $HOME/.aliases
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
