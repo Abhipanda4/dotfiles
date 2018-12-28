@@ -25,6 +25,7 @@
 "----------------------------------------------------------------------------------------------------
 
 set nocompatible
+set encoding=utf-8
 filetype off
 
 "----------------------------------------------------------------------------------------------------
@@ -70,7 +71,10 @@ filetype plugin indent on       "Add all plugins before this line
 "----------------------------------------------------------------------------------------------------
 
 set number
-set rnu         "Relative line numbering
+set rnu                     "Relative line numbering
+set formatoptions+=1      "Don't end lines with 1-letter words
+set wrapscan
+set linebreak
 
 "----------------------------------------------------------------------------------------------------
 "3.Advanced Searching:
@@ -80,8 +84,6 @@ set incsearch  " search incrementally
 set hlsearch   " Highlight search results
 set ignorecase
 set smartcase  " Ignore case unless capital letter is entered
-set wrapscan
-set linebreak
 
 "---------------------------------------------------------------------------------------------------
 "4.UserInterface Settings:
@@ -180,6 +182,9 @@ cmap cd. lcd %:p:h
 vnoremap < <gv
 vnoremap > >gv
 
+"follow tradition of C & D
+nnoremap Y y$
+
 "----------------------------------------------------------------------------------------------------
 "6.Indentation
 "----------------------------------------------------------------------------------------------------"
@@ -210,6 +215,7 @@ colorscheme wal
 "jellybeans,gardener
 set scrolloff=12                          "Scroll when 12 lines from top or bottom
 set cursorline                            "Horizontal highlighting of cursorline
+set ttyfast
 
 "----------------------------------------------------------------------------------------------------
 "9.Leader Key
@@ -240,7 +246,7 @@ vnoremap <leader>t :Tabularize /
 "quit without saving"
 nnoremap <leader>q :q!<cr>
 
-" vimbuftabline settings
+"vimbuftabline settings
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
 nmap <leader>3 <Plug>BufTabLine.Go(3)
@@ -256,10 +262,10 @@ nmap <leader>0 <Plug>BufTabLine.Go(10)
 "10.Insert Mode Tricks
 "----------------------------------------------------------------------------------------------------
 
-" for c style languages, autocomplete {
+"for c style languages, autocomplete {
 inoremap {<cr> {}<Esc>i<cr><Esc>O
 
-" change the current word to upper case
+"change the current word to upper case
 inoremap <c-u> <Esc>mzviwU`za
 
 "----------------------------------------------------------------------------------------------------
@@ -280,8 +286,8 @@ set ttimeoutlen=0
 
 "11.3.Custom Color-modes
 hi IncSearch ctermbg=40 ctermfg=232
-hi Search ctermbg=166 ctermfg=232
-hi Wildmenu ctermfg=16 ctermbg=255 cterm=bold
+hi Search ctermbg=148 ctermfg=232
+hi Wildmenu ctermfg=16 ctermbg=66 cterm=bold
 hi statuslineNC ctermbg=3 ctermfg=16
 hi cursorline ctermbg=232
 hi BufTabLineActive ctermbg=3 ctermfg=232
@@ -349,7 +355,7 @@ let g:ycm_autoclose_preview_window_after_completion=0
 "12.4. Clever-f
 let g:clever_f_across_no_line = 1
 let g:clever_f_timeout_ms=2000
-hi CleverFDefaultLabel ctermbg=None ctermfg=41 cterm=underline
+hi CleverFDefaultLabel ctermbg=None ctermfg=43 cterm=underline
 
 "12.5. Lightline config for statusline
 let g:lightline = {
@@ -378,11 +384,5 @@ let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 hi TagbarHighlight ctermbg=44 ctermfg=232
 
-"12.8 Async
-"open quickfix window automatically when something adds to it
-augroup async_quickfix
-    autocmd QuickFixCmdPost * botright copen 20
-augroup END
-
-"see real time python output
-let $PYTHONUNBUFFERED=1
+"12.8 Ack searching
+nnoremap <leader>a :Ack!<space>
