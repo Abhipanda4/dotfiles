@@ -1,10 +1,11 @@
 alias e="exit"
 alias c="clear"
+alias o="xdg-open"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-# update packages
+# pacman
 alias paci="sudo pacman -S --noconfirm" # pacman install
 alias pacs="sudo pacman -Ss" # pacman search
 alias pacr="sudo pacman -Rns" # pacman remove
@@ -13,11 +14,16 @@ alias pacr="sudo pacman -Rns" # pacman remove
 alias gs="git status"
 alias gc="git commit -m"
 alias gpush="git push origin master"
+alias gd="git diff"
 
 # make dir and cd into it
 mkcd () {
-	mkdir $1 && cd $1
+	[ -n "$1" ] && mkdir -p $1 && builtin cd $1
 }
 
 # Misc.
 alias sudo="sudo -E"
+
+# virtual envs
+alias ml="source activate machine_learning"
+alias sd="source deactivate"
