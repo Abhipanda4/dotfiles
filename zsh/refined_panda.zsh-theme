@@ -44,17 +44,17 @@ git_dirty() {
 
 # Display information about the current repository
 repo_information() {
-    echo "%F{blue}${vcs_info_msg_0_%%/.} %F{41}$vcs_info_msg_1_`git_dirty` $vcs_info_msg_2_%f"
+    echo "%F{7}${vcs_info_msg_0_%%/.} %F{41}$vcs_info_msg_1_`git_dirty` $vcs_info_msg_2_%f"
 }
 
 # Output additional information about paths and repos
 precmd() {
     vcs_info # Get version control info before we start outputting stuff
-    print -P "\n%F{1}%n : %f$(repo_information)"
+    print -P "\n%F{51}%n : %f$(repo_information)"
 }
 
 # Define prompts
-PROMPT="%(?.%F{magenta}.%F{43})➤%f " # Display a red prompt char on failure
+PROMPT="%(?.%F{51}.%F{43})➤%f " # Display a red prompt char on failure
 RPROMPT="%F{8}${SSH_TTY:+%n@%m}%f"    # Display username if connected via SSH
 
 # ------------------------------------------------------------------------------

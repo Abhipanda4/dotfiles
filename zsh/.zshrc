@@ -12,8 +12,6 @@ export LESS_TERMCAP_so=$'\e[1;34;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[0;31m'
 
-# added by Miniconda3 installer
-export PATH="/home/abhipanda/miniconda3/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 # Set name of the theme to load.
