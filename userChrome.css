@@ -1,0 +1,46 @@
+@namespace html url(http://www.w3.org/1999/xhtml);
+@namespace xul url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+/* For treetab */
+#TabsToolbar {
+  visibility: collapse;
+}
+
+#sidebar-header {
+  visibility: collapse !important;
+}
+
+.sidebar-splitter {
+  background-color: #111111 !important;
+}
+
+/* TST config
+ *
+.tab.unread .label {
+  color: red !important;
+  font-style: italic !important;
+}
+
+.tab {
+  background-color: #2e2e2e;
+}
+
+.tab:hover {
+    background-color: #383838 !important;
+    color: rgba(211,218,227,1) !important;
+}
+
+.tab.active {
+    background-color: #2aa19844 !important;
+}
+
+#tabbar {
+  background-color: #171917;
+}
+
+.newtab-button {
+	display: none;
+}
+
+*
+*/

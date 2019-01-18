@@ -1,0 +1,39 @@
+! "Enabled modi" Set from: Default
+! rofi.modi:                           window,run,ssh
+
+! "Window opacity" Set from: Default
+! rofi.opacity:                        100
+
+! "Window width" Set from: Default
+rofi.width:                          100
+
+! "Number of lines" Set from: Default
+rofi.lines:                          8
+
+! "Number of columns" Set from: Default
+rofi.columns:                        1
+
+! "Font to use" Set from: Default
+rofi.font:                           Roboto Mono for Powerline 11
+
+! Solarized theme
+rofi.color-enabled: true
+rofi.color-window: #181818, #2aa198, #2aa198
+rofi.color-normal: #181818, #a7a7a7, #181818, #2aa198, #181818
+
+! "Border width" Set from: Default
+rofi.bw:                             1
+
+! "Location on screen" Set from: Default
+rofi.location:                       1
+
+! "Padding" Set from: Default
+rofi.padding:                        20
+
+! "Terminal to use" Set from: Default
+rofi.terminal:                       termite
+
+! "Margin between rows" Set from: Default
+rofi.line-margin:                    5
+rofi.yoffset:                       -2
+rofi.bw                             2
