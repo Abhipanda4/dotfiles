@@ -61,7 +61,7 @@ Plugin 'majutsushi/tagbar'                " for a quick overview of code and qui
 
 Plugin 'skywind3000/asyncrun.vim'         " Asynchronously execute cmds, no need to leave vim anymore
 
-"Plugin 'valloric/YouCompleteMe'
+Plugin 'valloric/YouCompleteMe'           " Best autocomplete engine
 
 call vundle#end()
 filetype plugin indent on       "Add all plugins before this line
@@ -288,18 +288,19 @@ set ttimeoutlen=0
 hi IncSearch ctermbg=40 ctermfg=232
 hi Search ctermbg=148 ctermfg=232
 hi Wildmenu ctermfg=16 ctermbg=66 cterm=bold
-hi statuslineNC ctermbg=3 ctermfg=16
+hi statuslineNC ctermbg=53 ctermfg=65
 hi cursorline ctermbg=232
-hi BufTabLineActive ctermbg=3 ctermfg=232
-hi BufTabLineCurrent ctermbg=1 ctermfg=232
+hi BufTabLineActive ctermbg=53 ctermfg=232
+hi BufTabLineCurrent ctermbg=51 ctermfg=232
 hi Matchparen ctermbg=196 ctermfg=190
-hi Visual ctermbg=3 ctermfg=234
-hi Error ctermfg=0 ctermbg=41
+hi Visual ctermbg=53 ctermfg=234
+hi Error ctermfg=50 ctermbg=41
+hi TODO ctermbg=0 ctermfg=3
 
 "ctrlp highlight groups
-hi ctrlp_hi_0 ctermbg=1 ctermfg=0
-hi ctrlp_hi_1 ctermbg=8 ctermfg=7
-hi ctrlp_hi_2 ctermbg=2 ctermfg=6
+hi ctrlp_hi_0 ctermbg=51 ctermfg=50
+hi ctrlp_hi_1 ctermbg=58 ctermfg=57
+hi ctrlp_hi_2 ctermbg=52 ctermfg=56
 
 "11.4. Trailing White Spaces and Leading Tab characters
 hi ExtraWhiteSpace ctermbg=41
