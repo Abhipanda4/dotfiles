@@ -1,11 +1,11 @@
 [colors]
 dark = #131313
-light = #f1f1f1
+light = #e2e2e2
 theme = #2aa198
 bg-1 = #212121
 
 [bar/top]
-monitor = eDP1
+monitor = ${env:MONITOR:}
 width = 100%
 height = 30
 
@@ -127,7 +127,7 @@ animation-charging-framerate = 750
 [module/date]
 type = internal/date
 label =%date%   %time%
-date = %A, %d %b %Y
+date = %A, %d %b
 time = %I:%M %p
 
 format-padding = 0
@@ -163,10 +163,3 @@ label-urgent-foreground = #ffffff
 label-urgent-padding = 3
 
 pin-workspaces = true
-
-[module/mpd]
-type = internal/mpd
-format-online =  <label-song>
-
-label-song-maxlen = 40
-label-song-ellipsis = true
