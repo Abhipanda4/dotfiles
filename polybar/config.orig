@@ -2,10 +2,11 @@
 dark = #131313
 light = #e2e2e2
 theme = #2aa198
-bg-1 = #212121
+gray = #212121
 
 [bar/top]
-monitor = ${env:MONITOR:}
+ monitor = ${env:MONITOR:}
+#monitor = eDP1
 width = 100%
 height = 30
 
@@ -20,12 +21,12 @@ tray-detached = false
 tray-position = right
 tray-padding = 2
 
-font-0 = Roboto Mono Bold for Powerline:size=10;2
-font-1 = Unifont:style=Sans-Serif:size=11;2
-font-2 = Font Awesome 5 Free:style=Regular:pixelsize=11;2
-font-3 = Font Awesome 5 Free:style=Solid:pixelsize=11;2
-font-4 = Font Awesome 5 Brands:style=Regular:pixelsize=11;2
-font-5 = Material Icons:style=Regular:pixelsize=11;2
+font-0 = Roboto Mono Bold for Powerline:size=8;-1
+font-1 = Unifont:style=Sans-Serif:size=10;0
+font-2 = Font Awesome 5 Free:style=Regular:pixelsize=10;0
+font-3 = Font Awesome 5 Free:style=Solid:pixelsize=10;0
+font-4 = Font Awesome 5 Brands:style=Regular:pixelsize=10;0
+font-5 = Material Icons:style=Regular:pixelsize=10;0
 
 modules-left = icon i3 mpd
 modules-right = xkeyboard cpu memory backlight volume wireless-network wired-network battery date
@@ -47,7 +48,7 @@ label =   %percentage%%
 [module/memory]
 type = internal/memory
 format = <label>
-label =    %gb_used%
+label =  %gb_used%
 
 [module/backlight]
 type = internal/xbacklight
@@ -55,7 +56,7 @@ format = <label> <bar>
 
 label = 
 bar-width = 8
-bar-indicator = █
+bar-indicator = 
 bar-indicator-foreground = #ff
 bar-fill = ─
 bar-fill-foreground = ${colors.theme}
@@ -74,12 +75,9 @@ label-volume = 
 label-muted =    Mute
 label-muted-foreground = #ff6666
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-
 bar-volume-width = 8
 bar-volume-foreground-0 = ${colors.theme}
-bar-volume-indicator = █
+bar-volume-indicator = 
 bar-volume-indicator-foreground = #ff
 bar-volume-fill = ─
 bar-volume-empty = ─
@@ -91,13 +89,13 @@ interface = wlp8s0
 interval = 3.0
 
 format-connected = <label-connected>
-label-connected =   %{T0}%local_ip%%{T-}
+label-connected =   %{T0}%local_ip%%{T-}
 
 [module/wired-network]
 type = internal/network
 interface = enp9s0
 interval = 3.0
-label-connected =   %{T0}%local_ip%%{T-}
+label-connected =   %{T0}%local_ip%%{T-}
 
 [module/battery]
 type = internal/battery
@@ -147,7 +145,7 @@ wrapping-scroll = false
 
 label-focused =%name%
 label-focused-foreground = ${colors.theme}
-label-focused-background = ${colors.bg-1}
+label-focused-background = ${colors.gray}
 label-focused-overline = ${colors.theme}
 label-focused-padding = 3
 
