@@ -27,3 +27,9 @@ alias sudo="sudo -E"
 # virtual envs
 alias ml="source activate machine_learning"
 alias sd="source deactivate"
+
+# nvm source
+alias srcnvm="source /usr/share/nvm/init-nvm.sh"
+
+# tmux with sensible options
+alias tmux="tmux -u -2"

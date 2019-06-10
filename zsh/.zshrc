@@ -13,21 +13,21 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[0;31m'
 
 export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/sbin:$PATH"
 
 # Set name of the theme to load.
-ZSH_THEME="refined_panda"
+ZSH_THEME="agnoster"
 
 CASE_SENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Plugins
 plugins=(
   git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -41,3 +41,6 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 export EDITOR='vim'
+
+# Dimmed color for autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
