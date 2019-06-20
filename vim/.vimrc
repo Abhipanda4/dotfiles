@@ -23,35 +23,38 @@
 
 set nocompatible
 set encoding=utf-8
-filetype off
 
 "===============================================================================
 " 1.PLUGINS
 "===============================================================================
 
-set rtp+=~/.vim/bundle/vundle.vim/        " set run time path to include vundle
-call vundle#begin()
+" Automatically install vim-plug if NOT installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" General Plugins
-Plugin 'gmarik/vundle.vim'                " Plugin Manager
-Plugin 'valloric/YouCompleteMe'           " Best autocomplete engine
-Plugin 'ap/vim-buftabline'                " Tabline for buffer management
-Plugin 'itchyny/lightline.vim'            " Lightweight statusbar for vim
-Plugin 'rhysd/clever-f.vim'               " Use f, t, F, T more conveniently
-Plugin 'ctrlpvim/ctrlp.vim'               " Fuzzy File Searcher
-Plugin 'tpope/vim-commentary'             " Light plugin for commenting
-Plugin 'mileszs/ack.vim'                  " Search for keywords from within vim
-Plugin 'scrooloose/nerdtree'              " Directory view in a tree format
-Plugin 'tpope/vim-surround'               " Easier quotes/parenthesis
-Plugin 'godlygeek/tabular'                " Easy alignment
-Plugin 'w0rp/ale'                         " Linting Engine
-Plugin 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
+call plug#begin('~/.vim/bundle')
 
-" Language Specific Plugins - Python3
-Plugin 'vim-python/python-syntax'         " Advanced syntax highlighting for python
+Plug 'gmarik/vundle.vim'                " Plugin Manager
+Plug 'valloric/YouCompleteMe'           " Best autocomplete engine
+Plug 'ap/vim-buftabline'                " Tabline for buffer management
+Plug 'itchyny/lightline.vim'            " Lightweight statusbar for vim
+Plug 'rhysd/clever-f.vim'               " Use f, t, F, T more conveniently
+Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy File Searcher
+Plug 'tpope/vim-commentary'             " Light plugin for commenting
+Plug 'mileszs/ack.vim'                  " Search for keywords from within vim
+Plug 'scrooloose/nerdtree'              " Directory view in a tree format
+Plug 'tpope/vim-surround'               " Easier quotes/parenthesis
+Plug 'godlygeek/tabular'                " Easy alignment
+Plug 'w0rp/ale'                         " Linting Engine
+Plug 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
 
-call vundle#end()
-filetype plugin indent on       "Add all plugins before this line
+" Language Specific Plugs - Python3
+Plug 'vim-python/python-syntax'         " Advanced syntax highlighting for python
+
+call plug#end()
 
 "===============================================================================
 " 2.CODEBASE FORMATTING
