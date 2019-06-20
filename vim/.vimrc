@@ -37,6 +37,7 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
+" General Plugins
 Plug 'gmarik/vundle.vim'                " Plugin Manager
 Plug 'valloric/YouCompleteMe'           " Best autocomplete engine
 Plug 'ap/vim-buftabline'                " Tabline for buffer management
@@ -50,6 +51,7 @@ Plug 'tpope/vim-surround'               " Easier quotes/parenthesis
 Plug 'godlygeek/tabular'                " Easy alignment
 Plug 'w0rp/ale'                         " Linting Engine
 Plug 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
+Plug 'itchyny/vim-gitbranch'
 
 " Language Specific Plugs - Python3
 Plug 'vim-python/python-syntax'         " Advanced syntax highlighting for python
@@ -403,14 +405,17 @@ let g:lightline = {
     \ 'active' : {
         \ 'left' : [ [ 'mode', 'paste' ],
         \           [ 'readonly', 'relativepath', 'modified'] ],
-        \ 'right' : [ [ 'lineinfo' ], [ 'percent' ], [ 'filetype' ] ]
-        \},
+        \ 'right' : [ [ 'gitbranch' ], [ 'lineinfo' ], [ 'fileencoding', 'filetype' ] ]
+    \ },
     \ 'inactive' : {
         \ 'left' : [ ['relativepath'], ['modified'] ]
-        \},
+    \ },
     \ 'component' : {
         \ 'lineinfo': "%{line('.') . '/' . line('$')}",
-        \},
+    \ },
+    \ 'component_function' : {
+        \ 'gitbranch': 'gitbranch#name',
+    \ },
     \ 'enable' : {'statusline' : 1, 'tabline' : 0}
     \ }
 
