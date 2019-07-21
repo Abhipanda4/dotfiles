@@ -38,7 +38,6 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " General Plugins
-Plug 'gmarik/vundle.vim'                " Plugin Manager
 Plug 'valloric/YouCompleteMe'           " Best autocomplete engine
 Plug 'ap/vim-buftabline'                " Tabline for buffer management
 Plug 'itchyny/lightline.vim'            " Lightweight statusbar for vim
@@ -51,7 +50,7 @@ Plug 'tpope/vim-surround'               " Easier quotes/parenthesis
 Plug 'godlygeek/tabular'                " Easy alignment
 Plug 'w0rp/ale'                         " Linting Engine
 Plug 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
-Plug 'itchyny/vim-gitbranch'
+Plug 'itchyny/vim-gitbranch'            " See git branch name on lightline
 
 " Language Specific Plugs - Python3
 Plug 'vim-python/python-syntax'         " Advanced syntax highlighting for python
@@ -339,9 +338,7 @@ augroup END
 "===============================================================================
 
 " 12.1. CtrlP Configurations
-let g:ctrlp_by_filename = 0
 let g:ctrlp_mruf_exclude = '*.tar.gz\|bin|.git|*.srt|*.part'
-let g:ctrlp_clear_cache_on_exit = 0
 
 "ctrlp highlight groups
 hi ctrlp_hi_0 ctermbg=4 ctermfg=232

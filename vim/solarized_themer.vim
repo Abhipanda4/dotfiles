@@ -5,6 +5,7 @@
   let s:shade2 = "#87afaf"
   let s:shade3 = "#af8700"
   let s:shade4 = "#af5f00"
+  let s:shade5 = "#ff8700"
 
   let s:accent0 = "#e4e4e4"
   let s:accent1 = "#b2b2b2"
@@ -39,7 +40,7 @@
   let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
   let s:p.normal.left = [ [ s:accent5, s:shade1 ], [ s:accent2, s:shade2 ] ]
   let s:p.normal.middle = [ [ s:accent1, s:shade0 ] ]
-  let s:p.normal.right = [ [ s:accent2, s:shade2 ], [ s:shade0, s:accent1 ] ]
+  let s:p.normal.right = [ [ s:accent2, s:shade5 ], [ s:accent2, s:shade2 ], [ s:shade0, s:accent1 ] ]
   let s:p.normal.error = [ [ s:accent0, s:shade0 ] ]
   let s:p.normal.warning = [ [ s:accent2, s:shade1 ] ]
 
