@@ -170,20 +170,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-function! BlinkMatch(t)
-    " Blinks the current highlight with bright red for easy following
-    hi BlinkRed ctermbg=1 ctermfg=0
-    let [l:bufnum, l:lnum, l:col, l:off] = getpos('.')
-    let l:current = '\c\%#'.@/
-    let l:highlight = matchadd('BlinkRed', l:current, 1000)
-    redraw
-    exec 'sleep ' . float2nr(a:t * 1000) . 'm'
-    call matchdelete(l:highlight)
-endf
-
 " search results appear in middle of buffer and blink
-nnoremap n nzz:call BlinkMatch(0.2)<cr>
-nnoremap N Nzz:call BlinkMatch(0.2)<cr>
+nnoremap n nzz
+nnoremap N Nzz
 
 " Enable resaving a file as root with sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -368,11 +357,18 @@ fu! CtrlP_Statusline_2(...)
 	return len.dir
 endf
 
-" use ripgrep instead of grep for better speeds. Needs ripgrep to be
-" installed.
-if executable('rg')
-    set grepprg=rg\ --color=never
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+" use silver_searcher instead of grep for better speeds. Needs ag to be
+" installed. ripgrep is buggy!!
+" https://gist.github.com/grillermo/3e318d224b1ddcf1bafd
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 endif
 
 " 12.2. vim buftabline Configurations
@@ -440,8 +436,8 @@ let NERDTreeRespectWildIgnore = 1
 let NERDTreeShowLineNumbers = 0
 
 " 12.8. Ack searching
-if executable('rg')
-    let g:ackprg = "rg --vimgrep"
+if executable('ag')
+    let g:ackprg = "ag --vimgrep"
 endif
 nnoremap <leader>a :Ack!<space>
 
