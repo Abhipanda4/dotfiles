@@ -42,15 +42,16 @@ Plug 'valloric/YouCompleteMe'           " Best autocomplete engine
 Plug 'ap/vim-buftabline'                " Tabline for buffer management
 Plug 'itchyny/lightline.vim'            " Lightweight statusbar for vim
 Plug 'rhysd/clever-f.vim'               " Use f, t, F, T more conveniently
-Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy File Searcher
 Plug 'tpope/vim-commentary'             " Light plugin for commenting
-Plug 'mileszs/ack.vim'                  " Search for keywords from within vim
+Plug 'mhinz/vim-grepper'                " Search for keywords from within vim
 Plug 'scrooloose/nerdtree'              " Directory view in a tree format
 Plug 'tpope/vim-surround'               " Easier quotes/parenthesis
 Plug 'godlygeek/tabular'                " Easy alignment
 Plug 'w0rp/ale'                         " Linting Engine
 Plug 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
 Plug 'itchyny/vim-gitbranch'            " See git branch name on lightline
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Language Specific Plugs - Python3
 Plug 'vim-python/python-syntax'         " Advanced syntax highlighting for python
@@ -326,50 +327,8 @@ augroup END
 " 12.PLUGIN SETTINGS
 "===============================================================================
 
-" 12.1. CtrlP Configurations
-let g:ctrlp_mruf_exclude = '*.tar.gz\|bin|.git|*.srt|*.part'
-
-"ctrlp highlight groups
-hi ctrlp_hi_0 ctermbg=4 ctermfg=232
-hi ctrlp_hi_1 ctermbg=8 ctermfg=250
-hi ctrlp_hi_2 ctermbg=247 ctermfg=237
-
-" custom highlight groups for ctrlP status
-" Relevant links for future modifications:
-" https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt#L674
-" https://gist.github.com/kien/1610859
-let g:ctrlp_status_func = {
-	\ 'main': 'CtrlP_Statusline_1',
-	\ 'prog': 'CtrlP_Statusline_2',
-    \ }
-
-fu! CtrlP_Statusline_1(...)
-	let byfname = '%#ctrlp_hi_0# '.a:2.' '
-	let regex = a:3 ? '| REG ' : ''
-	let item = '%#ctrlp_hi_1# '.a:5.' '
-	let dir = ' %=%<%#ctrlp_hi_2# '.getcwd().' %*'
-    return byfname.regex.item.dir
-endf
-
-fu! CtrlP_Statusline_2(...)
-	let len = '%#Function# '.a:1.' %*'
-	let dir = ' %=%<%#LineNr# '.getcwd().' %*'
-	return len.dir
-endf
-
-" use silver_searcher instead of grep for better speeds. Needs ag to be
-" installed. ripgrep is buggy!!
-" https://gist.github.com/grillermo/3e318d224b1ddcf1bafd
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
+" 12.1. fzf Configurations
+nnoremap <C-p> :Files<Cr>
 
 " 12.2. vim buftabline Configurations
 hi BufTabLineFill cterm=none ctermbg=8
@@ -435,11 +394,8 @@ let NERDTreeMinimalUI = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeShowLineNumbers = 0
 
-" 12.8. Ack searching
-if executable('ag')
-    let g:ackprg = "ag --vimgrep"
-endif
-nnoremap <leader>a :Ack!<space>
+" 12.8. Use grepper with ag for lightning fast results.
+nnoremap <leader>a :GrepperAg <space>
 
 " 12.9. ALE Configurations
 " Use quickfix list instead of loclist
