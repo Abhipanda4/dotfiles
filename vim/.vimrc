@@ -42,15 +42,16 @@ Plug 'valloric/YouCompleteMe'           " Best autocomplete engine
 Plug 'ap/vim-buftabline'                " Tabline for buffer management
 Plug 'itchyny/lightline.vim'            " Lightweight statusbar for vim
 Plug 'rhysd/clever-f.vim'               " Use f, t, F, T more conveniently
-Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy File Searcher
 Plug 'tpope/vim-commentary'             " Light plugin for commenting
-Plug 'mileszs/ack.vim'                  " Search for keywords from within vim
+Plug 'mhinz/vim-grepper'                " Search for keywords from within vim
 Plug 'scrooloose/nerdtree'              " Directory view in a tree format
 Plug 'tpope/vim-surround'               " Easier quotes/parenthesis
 Plug 'godlygeek/tabular'                " Easy alignment
 Plug 'w0rp/ale'                         " Linting Engine
 Plug 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
 Plug 'itchyny/vim-gitbranch'            " See git branch name on lightline
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Language Specific Plugs - Python3
 Plug 'vim-python/python-syntax'         " Advanced syntax highlighting for python
@@ -170,20 +171,9 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-function! BlinkMatch(t)
-    " Blinks the current highlight with bright red for easy following
-    hi BlinkRed ctermbg=1 ctermfg=0
-    let [l:bufnum, l:lnum, l:col, l:off] = getpos('.')
-    let l:current = '\c\%#'.@/
-    let l:highlight = matchadd('BlinkRed', l:current, 1000)
-    redraw
-    exec 'sleep ' . float2nr(a:t * 1000) . 'm'
-    call matchdelete(l:highlight)
-endf
-
 " search results appear in middle of buffer and blink
-nnoremap n nzz:call BlinkMatch(0.2)<cr>
-nnoremap N Nzz:call BlinkMatch(0.2)<cr>
+nnoremap n nzz
+nnoremap N Nzz
 
 " Enable resaving a file as root with sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -337,43 +327,8 @@ augroup END
 " 12.PLUGIN SETTINGS
 "===============================================================================
 
-" 12.1. CtrlP Configurations
-let g:ctrlp_mruf_exclude = '*.tar.gz\|bin|.git|*.srt|*.part'
-
-"ctrlp highlight groups
-hi ctrlp_hi_0 ctermbg=4 ctermfg=232
-hi ctrlp_hi_1 ctermbg=8 ctermfg=250
-hi ctrlp_hi_2 ctermbg=247 ctermfg=237
-
-" custom highlight groups for ctrlP status
-" Relevant links for future modifications:
-" https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt#L674
-" https://gist.github.com/kien/1610859
-let g:ctrlp_status_func = {
-	\ 'main': 'CtrlP_Statusline_1',
-	\ 'prog': 'CtrlP_Statusline_2',
-    \ }
-
-fu! CtrlP_Statusline_1(...)
-	let byfname = '%#ctrlp_hi_0# '.a:2.' '
-	let regex = a:3 ? '| REG ' : ''
-	let item = '%#ctrlp_hi_1# '.a:5.' '
-	let dir = ' %=%<%#ctrlp_hi_2# '.getcwd().' %*'
-    return byfname.regex.item.dir
-endf
-
-fu! CtrlP_Statusline_2(...)
-	let len = '%#Function# '.a:1.' %*'
-	let dir = ' %=%<%#LineNr# '.getcwd().' %*'
-	return len.dir
-endf
-
-" use ripgrep instead of grep for better speeds. Needs ripgrep to be
-" installed.
-if executable('rg')
-    set grepprg=rg\ --color=never
-    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-endif
+" 12.1. fzf Configurations
+nnoremap <C-p> :Files<Cr>
 
 " 12.2. vim buftabline Configurations
 hi BufTabLineFill cterm=none ctermbg=8
@@ -439,11 +394,8 @@ let NERDTreeMinimalUI = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeShowLineNumbers = 0
 
-" 12.8. Ack searching
-if executable('rg')
-    let g:ackprg = "rg --vimgrep"
-endif
-nnoremap <leader>a :Ack!<space>
+" 12.8. Use grepper with ag for lightning fast results.
+nnoremap <leader>a :GrepperAg <space>
 
 " 12.9. ALE Configurations
 " Use quickfix list instead of loclist
