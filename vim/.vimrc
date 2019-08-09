@@ -54,7 +54,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Language Specific Plugs - Python3
-Plug 'vim-python/python-syntax'         " Advanced syntax highlighting for python
+Plug 'vim-python/python-syntax'
+
+" Language Specific Plugs - JSX
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
@@ -139,9 +143,6 @@ vnoremap : ;
 
 " quit without saving
 nnoremap Q :q!<cr>
-
-" use enter key for adding blank lines
-nnoremap <cr> o<esc>
 
 " Natural movement in case of wrapped lines; NO skipping
 nnoremap j gj
