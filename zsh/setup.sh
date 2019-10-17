@@ -39,3 +39,6 @@ do
 done
 
 echo ")" >> $PLUGIN_FILE
+
+# install FZF
+git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf; $HOME/.fzf/install

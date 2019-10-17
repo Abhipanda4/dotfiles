@@ -12,7 +12,7 @@ alias ez="nvim $HOME/.zshrc"
 
 # make dir and cd into it
 function mkcd() {
-	[ "$1" -ne "" ] && mkdir -p $1 && builtin cd $1
+	mkdir -p $1 && builtin cd $1
 }
 
 # neovim is the way to go
@@ -23,7 +23,8 @@ alias tmux="tmux -u -2"
 
 # use bat instead of cat
 function cat() {
-    [ "$1" -ne "" ] && bat --theme OneHalfDark --color always --style full --paging never "$1" \
+    # TODO: handle empty args
+    bat --theme OneHalfDark --color always --style full --paging never "$1" \
         | less --tabs 4 -RS
 }
 
