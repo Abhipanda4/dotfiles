@@ -1,0 +1,38 @@
+# env variable settings
+export DEFAULT_USER=`whoami`
+export TERM="xterm-256color"
+export ZSH="$HOME/.config/oh-my-zsh"
+export CUSTOM_ZSH="$ZSH/custom"
+
+# for colorized man pages
+export LESS_TERMCAP_mb=$'\e[0;33m'
+export LESS_TERMCAP_md=$'\e[0;35m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[1;34;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[0;31m'
+
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/sbin:$PATH"
+
+CASE_SENSITIVE="true"
+DISABLE_AUTO_UPDATE="true"
+ENABLE_CORRECTION="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+source $CUSTOM_ZSH/plugins.zsh
+
+source $ZSH/oh-my-zsh.sh
+source $CUSTOM_ZSH/themes/thunder.zsh
+source $CUSTOM_ZSH/aliases.zsh
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export EDITOR='vim'
+
+# FZF for fuzzy finding
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
