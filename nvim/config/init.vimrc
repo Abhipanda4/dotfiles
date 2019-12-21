@@ -20,15 +20,17 @@ Plug 'Shougo/deoplete-clangx', { 'for': 'cpp' }
 " Colorschemes
 Plug 'joshdick/onedark.vim'
 
-" Prerequisite:
-" git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install
-Plug '~/.fzf'
+" fuzzy finder
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Utils for editing
 Plug 'rhysd/clever-f.vim'
-Plug 'tpope/vim-commentary'
+Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
+Plug 'tpope/vim-surround'
+
+" Project wide search
 Plug 'mhinz/vim-grepper'
 
 " Statusline & Tabline
@@ -36,8 +38,11 @@ Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'ap/vim-buftabline'
 
-" Lint
+" Lint info and fixers
 Plug 'w0rp/ale'
+
+" Git info on sign column
+Plug 'mhinz/vim-signify'
 
 " File Explorer
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeFocus'] }

@@ -40,6 +40,9 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap n nzz
 nnoremap N Nzz
 
+" search for visual selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 " Enable resaving a file as root with sudo
 cmap w!! w !sudo tee % >/dev/null
 
@@ -62,11 +65,11 @@ noremap <expr> <C-b> max([winheight(0) - 2, 1])
 noremap <expr> <C-e> (line("w$") >= line('$') ? "j" : "3\<C-e>")
 noremap <expr> <C-y> (line("w0") <= 1         ? "k" : "3\<C-y>")
 
-" Press ENTER for blank line(in place)
-nnoremap <silent> [<space> :set paste<CR>m`O<Esc>``:set nopaste<CR>
-nnoremap <silent> ]<space> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+" Insert blank lines with count
+nnoremap [<space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>'[
+nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 
-" QUICKFIX WINDOW SETTINGS
+" QUICKFIX LIST SETTINGS
 " ========================
 " Toggle quickfix window
 function! s:QuickfixToggle()
@@ -82,18 +85,18 @@ endf
 
 command! ToggleQuickfix call <SID>QuickfixToggle()
 nnoremap gq :ToggleQuickfix<cr>
-
-" Mappings for jumping to next/prev in quickfix window
 nnoremap ]q :cnext<cr>
 nnoremap [q :cprev<cr>
 
+" LOCATION LIST SETTINGS
+" ========================
 function! s:BufferCount()
     return len(filter(range(1, bufnr('$')), 'bufwinnr(v:val) != -1'))
 endfunction
 
 function! s:LocListToggle()
     let buffer_count_before = s:BufferCount()
-    " Location list can't be closed if there's cursor in it, so we need 
+    " Location list can't be closed if there's cursor in it, so we need
     " to call lclose twice to move cursor to the main pane
     silent! lclose
     silent! lclose
@@ -105,13 +108,15 @@ endfunction
 
 command! ToggleLocList call <SID>LocListToggle()
 nnoremap gl :ToggleLocList<cr>
+nnoremap [l :lprev<cr>
+nnoremap ]l :lnext<cr>
 
 " Next/Prev buffers
 nnoremap [b :bprev<cr>
 nnoremap ]b :bnext<cr>
 
 " Autocomplete { on pressing <cr>
-inoremap {<cr> {}<Esc>i<cr><Esc>O 
+inoremap {<cr> {}<Esc>i<cr><Esc>O
 
 " LEADER KEY MAPPINGS
 " ===================
@@ -123,6 +128,3 @@ nnoremap <leader>Q :qa!<cr>
 
 " Clear highlighting of searched text
 nnoremap <silent> <leader>h :nohlsearch<cr>
-
-" quick source vimrc
-nnoremap <silent> <leader>sv :source $MYVIMRC<cr>

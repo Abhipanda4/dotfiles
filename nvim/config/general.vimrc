@@ -72,8 +72,8 @@ set wildignore+=$VIMRUNTIME/doc/*.tar.gz         " compressed helpfiles
 set wildignore+=**/doc/*.txt
 
 set showcmd
-set history=100
 set cmdheight=1
+set history=1000
 
 " no redrawing when executing macros
 set lazyredraw
@@ -87,5 +87,6 @@ set splitbelow
 set splitright
 
 " Timeout settings
+set updatetime=100
 set timeoutlen=1000
 set ttimeoutlen=0

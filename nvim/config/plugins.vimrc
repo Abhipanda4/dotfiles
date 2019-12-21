@@ -2,9 +2,8 @@
 nnoremap <leader>f :Files<cr>
 nnoremap <leader>b :Buffers<cr>
 
-" Use grepper with ripgrep for lightning fast results.
-" export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden'
-nnoremap <leader>r :GrepperRg <space>
+" Use grepper for project wide search
+nnoremap <leader>a :GrepperAg <space>
 
 " Clever-f settings
 let g:clever_f_across_no_line = 1
@@ -100,12 +99,13 @@ let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
-let g:ale_linters = {'python': ['pylint']}
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_fixers = {'python': ['yapf']}
 
 nmap <silent> ]a <Plug>(ale_next_wrap)
 nmap <silent> [a <Plug>(ale_previous_wrap)
 
-" NERDTree settings
+" NERDTree setting
 function! NERDTreeToggleFind()
     if exists("g:NERDTree") && g:NERDTree.IsOpen()
         NERDTreeClose
@@ -119,8 +119,6 @@ nnoremap <silent> <leader>n :call NERDTreeToggleFind()<cr><C-W>=
 nnoremap <silent> <leader>t :NERDTreeFocus<cr>
 
 " Some sensible options
-let NERDTreeQuitOnOpen = 1
-let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeShowLineNumbers = 0
@@ -128,6 +126,12 @@ let NERDTreeShowLineNumbers = 0
 " Python syntax
 let g:python_highlight_all = 1
 
-" Tag navigation
-nnoremap ]t <C-]>
-nnoremap [t <C-O>
+"Signify options
+let g:signify_sign_add        = '+'
+let g:signify_sign_delete     = '~'
+let g:signify_sign_change     = '!'
+let g:signify_sign_show_count = 0
+
+nnoremap <leader>ss :SignifyToggle<cr>
+nnoremap <leader>sd :SignifyHunkDiff<cr>
+nnoremap <leader>su :SignifyHunkUndo<cr>
