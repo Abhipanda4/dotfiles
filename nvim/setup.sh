@@ -3,7 +3,6 @@ which nvim
 if [ $? -ne 0 ]
 then
     echo "Make sure Neovim is installed before running the script"
-    return
 fi
 
 CONFIG="$HOME/dotfiles/nvim"

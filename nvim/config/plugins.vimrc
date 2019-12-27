@@ -97,10 +97,16 @@ let g:buftabline_indicators = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
+let g:ale_linters_explicit = 1
+
+let g:ale_linters = {
+\   'python': ['flake8']
+\ }
+
+let g:ale_fixers = {'python': ['yapf']}
+
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
-let g:ale_linters = {'python': ['flake8']}
-let g:ale_fixers = {'python': ['yapf']}
 
 nmap <silent> ]a <Plug>(ale_next_wrap)
 nmap <silent> [a <Plug>(ale_previous_wrap)
@@ -127,9 +133,9 @@ let NERDTreeShowLineNumbers = 0
 let g:python_highlight_all = 1
 
 "Signify options
-let g:signify_sign_add        = '+'
-let g:signify_sign_delete     = '~'
-let g:signify_sign_change     = '!'
+let g:signify_sign_add        = '|'
+let g:signify_sign_delete     = '|'
+let g:signify_sign_change     = '|'
 let g:signify_sign_show_count = 0
 
 nnoremap <leader>ss :SignifyToggle<cr>

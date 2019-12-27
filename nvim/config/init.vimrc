@@ -28,7 +28,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
-Plug 'tpope/vim-surround'
+Plug 'machakann/vim-sandwich'
 
 " Project wide search
 Plug 'mhinz/vim-grepper'

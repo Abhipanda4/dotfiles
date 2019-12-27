@@ -33,7 +33,7 @@ echo "Installing custom plugins"
 
 for plug in "${plugins[@]}"
 do
-    echo "\t$plug" >> $PLUGIN_FILE
+    echo "    $plug" >> $PLUGIN_FILE
     git_repo="$base_url/$plug.git"
     git clone $git_repo "$OHMYZSH/custom/plugins/$plug"
 done

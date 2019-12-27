@@ -56,10 +56,6 @@ Plug 'junegunn/fzf.vim'
 " Language Specific Plugs - Python3
 Plug 'vim-python/python-syntax'
 
-" Language Specific Plugs - JSX
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-
 call plug#end()
 
 "===============================================================================

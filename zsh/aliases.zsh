@@ -22,8 +22,7 @@ alias vim="nvim"
 alias tmux="tmux -u -2"
 
 # use bat instead of cat
-function cat() {
-    # TODO: handle empty args
+function bat() {
     bat --theme OneHalfDark --color always --style full --paging never "$1" \
         | less --tabs 4 -RS
 }

@@ -15,17 +15,22 @@ export LESS_TERMCAP_us=$'\e[0;31m'
 
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/sbin:$PATH"
+export PATH="$HOME/bin/:$PATH"
 
 CASE_SENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+ZSH_DISABLE_COMPFIX="true"
+
 
 source $CUSTOM_ZSH/plugins.zsh
 
 source $ZSH/oh-my-zsh.sh
 source $CUSTOM_ZSH/themes/thunder.zsh
 source $CUSTOM_ZSH/aliases.zsh
+
+[ -f $HOME/.aliases.local ] && source $HOME/.aliases.local
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
