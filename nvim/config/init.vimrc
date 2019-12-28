@@ -1,7 +1,7 @@
 " Auto install vim-plug before starting
 let autoload_plug_path = stdpath('data') . '/site/autoload/plug.vim'
 if !filereadable(autoload_plug_path)
-  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs 
+  silent execute '!curl -fLo ' . autoload_plug_path . '  --create-dirs
       \ "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"'
   augroup _vimplug
       autocmd!
@@ -21,6 +21,7 @@ Plug 'Shougo/deoplete-clangx', { 'for': 'cpp' }
 Plug 'joshdick/onedark.vim'
 
 " fuzzy finder
+" Prerequisite: install fzf first
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -29,6 +30,7 @@ Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
 Plug 'machakann/vim-sandwich'
+Plug 'tmsvg/pear-tree'
 
 " Project wide search
 Plug 'mhinz/vim-grepper'
@@ -36,7 +38,6 @@ Plug 'mhinz/vim-grepper'
 " Statusline & Tabline
 Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
-Plug 'ap/vim-buftabline'
 
 " Lint info and fixers
 Plug 'w0rp/ale'
@@ -47,7 +48,7 @@ Plug 'mhinz/vim-signify'
 " File Explorer
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeFocus'] }
 
-" Language specific plugins
+" Language specific syntax plugins
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 

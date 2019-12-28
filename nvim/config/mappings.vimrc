@@ -115,9 +115,6 @@ nnoremap ]l :lnext<cr>
 nnoremap [b :bprev<cr>
 nnoremap ]b :bnext<cr>
 
-" Autocomplete { on pressing <cr>
-inoremap {<cr> {}<Esc>i<cr><Esc>O
-
 " LEADER KEY MAPPINGS
 " ===================
 let mapleader = "\<Space>"

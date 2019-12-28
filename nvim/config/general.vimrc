@@ -67,13 +67,12 @@ set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-set wildignore+=*.class                          " Java Class files
 set wildignore+=$VIMRUNTIME/doc/*.txt            " Individual helpfiles
 set wildignore+=$VIMRUNTIME/doc/*.tar.gz         " compressed helpfiles
 set wildignore+=**/doc/*.txt
 
 set showcmd
-set cmdheight=1
+set cmdheight=2
 set history=1000
 
 " no redrawing when executing macros

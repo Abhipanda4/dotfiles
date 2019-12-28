@@ -1,26 +1,78 @@
-" FZF settings
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>b :Buffers<cr>
+" ===============================================================
+" DEOPLETE
+" ===============================================================
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 
-" Use grepper for project wide search
-nnoremap <leader>a :GrepperAg <space>
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
 
-" Clever-f settings
+" ===============================================================
+" FZF
+" ===============================================================
+" disable line numbers inside fzf search results
+augroup fzf
+  autocmd!
+  autocmd! FileType fzf
+  autocmd  FileType fzf set nonumber nornu
+    \| autocmd BufLeave <buffer> set number rnu
+augroup END
+
+" Better colors for fzf
+let g:fzf_colors = {
+\   'bg+':     ['bg', 'Normal'],
+\   'fg+':     ['fg', 'Statement'],
+\   'info':    ['fg', 'MatchParen'],
+\   'pointer': ['fg', 'Special'],
+\   'prompt':  ['fg', 'Special']
+\ }
+
+" minimal statusline
+function! s:fzf_statusline()
+  highlight fzf1 ctermfg=232 ctermbg=114
+  highlight fzf2 ctermbg=235
+  setlocal statusline=%#fzf1#\ FZF\ %#fzf2#
+endfunction
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
+
+" ===============================================================
+" CLEVER-F
+" ===============================================================
 let g:clever_f_across_no_line = 1
 let g:clever_f_fix_key_direction = 1
 let g:clever_f_timeout_ms = 4000
 
-" tabularise plugin
+" ===============================================================
+" TABULAR
+" ===============================================================
 vnoremap <leader>t :<C-u>Tabularize /
 
-" Deoplete settings
-let g:deoplete#enable_at_startup = 1
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+" ===============================================================
+" VIM-SANDWICH
+" ===============================================================
 
-call deoplete#custom#var('clangx', 'clang_binary', '/usr/bin/clang')
+" ===============================================================
+" PEAR-TREE
+" ===============================================================
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 
-" lightline settings
+" ===============================================================
+" GREPPER
+" ===============================================================
+let g:grepper = {}
+let g:grepper.highlight = 1
+let g:grepper.switch = 0
+let g:grepper.dir = 'repo,cwd'
+command! Todo Grepper -noprompt -tool git -query -E '(TODO|FIXME|NOTE)'
+nnoremap <leader>g :GrepperAg <space>
+
+" ===============================================================
+" LIGHTLINE
+" ===============================================================
 let g:lightline = {
     \ 'colorscheme' : 'onedark',
     \ 'active' : {
@@ -78,22 +130,9 @@ augroup _lightline_ale
     autocmd User ALELintPost call lightline#update()
 augroup end
 
-" Buftabline
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-nmap <leader>0 <Plug>BufTabLine.Go(10)
-
-let g:buftabline_numbers = 2
-let g:buftabline_indicators = 1
-
-" ALE configuration
+" ===============================================================
+" ALE
+" ===============================================================
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
@@ -111,7 +150,21 @@ let g:ale_sign_warning = '⚠'
 nmap <silent> ]a <Plug>(ale_next_wrap)
 nmap <silent> [a <Plug>(ale_previous_wrap)
 
-" NERDTree setting
+" ===============================================================
+" SIGNIFY
+" ===============================================================
+let g:signify_sign_add        = '|'
+let g:signify_sign_delete     = '|'
+let g:signify_sign_change     = '|'
+let g:signify_sign_show_count = 0
+
+nnoremap <leader>ss :SignifyToggle<cr>
+nnoremap <leader>sd :SignifyHunkDiff<cr>
+nnoremap <leader>su :SignifyHunkUndo<cr>
+
+" ===============================================================
+" NERDTREE
+" ===============================================================
 function! NERDTreeToggleFind()
     if exists("g:NERDTree") && g:NERDTree.IsOpen()
         NERDTreeClose
@@ -124,20 +177,11 @@ endfunction
 nnoremap <silent> <leader>n :call NERDTreeToggleFind()<cr><C-W>=
 nnoremap <silent> <leader>t :NERDTreeFocus<cr>
 
-" Some sensible options
 let NERDTreeMinimalUI = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeShowLineNumbers = 0
 
-" Python syntax
+" ===============================================================
+" SYNTAX
+" ===============================================================
 let g:python_highlight_all = 1
-
-"Signify options
-let g:signify_sign_add        = '|'
-let g:signify_sign_delete     = '|'
-let g:signify_sign_change     = '|'
-let g:signify_sign_show_count = 0
-
-nnoremap <leader>ss :SignifyToggle<cr>
-nnoremap <leader>sd :SignifyHunkDiff<cr>
-nnoremap <leader>su :SignifyHunkUndo<cr>

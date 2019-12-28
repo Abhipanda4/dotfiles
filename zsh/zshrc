@@ -1,8 +1,13 @@
 # env variable settings
 export DEFAULT_USER=`whoami`
 export TERM="xterm-256color"
-export ZSH="$HOME/.config/oh-my-zsh"
-export CUSTOM_ZSH="$ZSH/custom"
+export DOTFILES="$HOME/dotfiles"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export EDITOR='vim'
 
 # for colorized man pages
 export LESS_TERMCAP_mb=$'\e[0;33m'
@@ -23,20 +28,17 @@ ENABLE_CORRECTION="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_DISABLE_COMPFIX="true"
 
-
-source $CUSTOM_ZSH/plugins.zsh
-
-source $ZSH/oh-my-zsh.sh
-source $CUSTOM_ZSH/themes/thunder.zsh
-source $CUSTOM_ZSH/aliases.zsh
-
+# workstation specific aliases; not to be made public
 [ -f $HOME/.aliases.local ] && source $HOME/.aliases.local
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# env variables for zsh setup
+export ZSH="$HOME/.config/oh-my-zsh"
+export CUSTOM_ZSH="$ZSH/custom"
 
-# Preferred editor for local and remote sessions
-export EDITOR='vim'
+source $CUSTOM_ZSH/themes/thunder.zsh
+source $CUSTOM_ZSH/aliases.zsh
+source $CUSTOM_ZSH/plugins.zsh
+source $ZSH/oh-my-zsh.sh
 
 # FZF for fuzzy finding
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
