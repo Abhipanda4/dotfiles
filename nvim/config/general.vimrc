@@ -10,6 +10,7 @@ colorscheme onedark
 set formatoptions+=1    "Don't end lines with 1-letter words
 set wrapscan
 set linebreak
+set backspace=indent,eol,start
 set number
 set relativenumber
 
@@ -23,8 +24,7 @@ augroup Entrypoint
 augroup END
 
 " StatusLine settings
-set showtabline=2
-set guioptions-=e
+set showtabline=0
 set laststatus=2
 
 " Indentation settings

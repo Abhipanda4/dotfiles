@@ -21,7 +21,6 @@ Plug 'Shougo/deoplete-clangx', { 'for': 'cpp' }
 Plug 'joshdick/onedark.vim'
 
 " fuzzy finder
-" Prerequisite: install fzf first
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -29,8 +28,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'rhysd/clever-f.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'godlygeek/tabular'
-Plug 'machakann/vim-sandwich'
 Plug 'tmsvg/pear-tree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 " Project wide search
 Plug 'mhinz/vim-grepper'

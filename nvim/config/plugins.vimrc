@@ -51,10 +51,6 @@ let g:clever_f_timeout_ms = 4000
 vnoremap <leader>t :<C-u>Tabularize /
 
 " ===============================================================
-" VIM-SANDWICH
-" ===============================================================
-
-" ===============================================================
 " PEAR-TREE
 " ===============================================================
 let g:pear_tree_smart_closers = 1
@@ -65,7 +61,7 @@ let g:pear_tree_smart_backspace = 1
 " ===============================================================
 let g:grepper = {}
 let g:grepper.highlight = 1
-let g:grepper.switch = 0
+let g:grepper.switch = 1
 let g:grepper.dir = 'repo,cwd'
 command! Todo Grepper -noprompt -tool git -query -E '(TODO|FIXME|NOTE)'
 nnoremap <leader>g :GrepperAg <space>

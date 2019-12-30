@@ -1,5 +1,6 @@
 " GENERAL BINDINGS
 " ================
+" avoid auto indent on pasting from clipboard
 set pastetoggle=<F6>
 
 " interchange : and ;
@@ -52,6 +53,10 @@ vnoremap > >gv
 
 " follow tradition of C & D
 nnoremap Y y$
+
+" Split line at cursor
+" Opposite of J(oin) line
+nnoremap S i<cr><esc><right>
 
 " use terminal style mappings in cmd mode
 cnoremap <C-a> <home>

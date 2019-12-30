@@ -7,20 +7,20 @@ then
 fi
 
 # custom install script for zsh
-CONFIG="$HOME/dotfiles/zsh"
+DOTFILES="$HOME/dotfiles"
 OHMYZSH="$HOME/.config/oh-my-zsh"
 
 # clone oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $OHMYZSH
 
 # setup symlinks
-ln -s $CONFIG/zshrc $HOME/.zshrc
+ln -s $DOTFILES/zsh/zshrc $HOME/.zshrc
 echo "Created symlink to .zshrc"
 
-ln -s $CONFIG/thunder.zsh $OHMYZSH/custom/themes/
+ln -s $DOTFILES/zsh/thunder.zsh $OHMYZSH/custom/themes/
 echo "Created symlink to custom theme"
 
-ln -s $CONFIG/aliases.zsh $OHMYZSH/custom/
+ln -s $DOTFILES/zsh/aliases.zsh $OHMYZSH/custom/
 echo "Created symlink to custom aliases"
 
 # clone custom plugins
