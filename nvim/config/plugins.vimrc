@@ -35,7 +35,7 @@ function! s:fzf_statusline()
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>f :Files ~/dev<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
 
 " ===============================================================
@@ -129,10 +129,8 @@ augroup end
 " ===============================================================
 " ALE
 " ===============================================================
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
 let g:ale_linters_explicit = 1
+let g:ale_set_highlights = 0
 
 let g:ale_linters = {
 \   'python': ['flake8']
@@ -140,8 +138,8 @@ let g:ale_linters = {
 
 let g:ale_fixers = {'python': ['yapf']}
 
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '▲'
 
 nmap <silent> ]a <Plug>(ale_next_wrap)
 nmap <silent> [a <Plug>(ale_previous_wrap)
@@ -149,9 +147,9 @@ nmap <silent> [a <Plug>(ale_previous_wrap)
 " ===============================================================
 " SIGNIFY
 " ===============================================================
-let g:signify_sign_add        = '|'
-let g:signify_sign_delete     = '|'
-let g:signify_sign_change     = '|'
+let g:signify_sign_add        = '│'
+let g:signify_sign_delete     = '│'
+let g:signify_sign_change     = '│'
 let g:signify_sign_show_count = 0
 
 nnoremap <leader>ss :SignifyToggle<cr>
@@ -180,4 +178,11 @@ let NERDTreeShowLineNumbers = 0
 " ===============================================================
 " SYNTAX
 " ===============================================================
+" Python
 let g:python_highlight_all = 1
+
+" CPP
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_template_highlight = 1

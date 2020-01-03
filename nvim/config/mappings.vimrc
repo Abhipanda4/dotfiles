@@ -130,3 +130,10 @@ nnoremap <leader>Q :qa!<cr>
 
 " Clear highlighting of searched text
 nnoremap <silent> <leader>h :nohlsearch<cr>
+
+" insert breakpoint in python
+augroup debug_points
+    autocmd!
+    autocmd FileType python nnoremap <leader>d mzoimport pdb; pdb.set_trace()  # noqa: E702; yapf: disable<Esc>`z
+    autocmd FileType python nnoremap <leader>D mzOimport pdb; pdb.set_trace()  # noqa: E702; yapf: disable<Esc>`z
+augroup END
