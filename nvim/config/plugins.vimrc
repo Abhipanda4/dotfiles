@@ -35,8 +35,8 @@ function! s:fzf_statusline()
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-nnoremap <silent> <leader>f :Files ~/dev<cr>
-nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>t :Tags<cr>
 
 " ===============================================================
 " CLEVER-F
@@ -46,15 +46,10 @@ let g:clever_f_fix_key_direction = 1
 let g:clever_f_timeout_ms = 4000
 
 " ===============================================================
-" TABULAR
+" EASY-ALIGN
 " ===============================================================
-vnoremap <leader>t :<C-u>Tabularize /
-
-" ===============================================================
-" PEAR-TREE
-" ===============================================================
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
+vmap <cr> <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " ===============================================================
 " GREPPER
@@ -67,68 +62,11 @@ command! Todo Grepper -noprompt -tool git -query -E '(TODO|FIXME|NOTE)'
 nnoremap <leader>g :GrepperAg <space>
 
 " ===============================================================
-" LIGHTLINE
-" ===============================================================
-let g:lightline = {
-    \ 'colorscheme' : 'onedark',
-    \ 'active' : {
-        \ 'left' : [ [ 'mode', 'paste' ],
-        \           [ 'readonly', 'relativepath', 'modified'] ],
-        \ 'right' : [ [ 'gitbranch', 'linter_warnings', 'linter_errors', 'linter_ok' ],
-        \           [ 'lineinfo' ], [ 'fileencoding', 'filetype' ] ]
-    \ },
-    \ 'inactive' : {
-        \ 'left' : [ ['relativepath'], ['modified'] ]
-    \ },
-    \ 'component' : {
-        \ 'lineinfo': "%{line('.') . '/' . line('$')}",
-    \ },
-    \ 'component_function' : {
-        \ 'gitbranch': 'gitbranch#name',
-    \ },
-    \ 'component_expand': {
-        \ 'linter_warnings': 'LightlineLinterWarnings',
-        \ 'linter_errors': 'LightlineLinterErrors',
-        \ 'linter_ok': 'LightlineLinterOK'
-    \ },
-    \ 'component_type': {
-        \ 'readonly': 'error',
-        \ 'linter_warnings': 'warning',
-        \ 'linter_errors': 'error',
-        \ 'linter_ok': 'ok'
-    \ },
-    \ 'enable' : {'statusline' : 1, 'tabline' : 0}
-    \ }
-
-function! LightlineLinterWarnings() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-    return l:counts.total == 0 ? '' : printf('%d ▲', all_non_errors)
-endfunction
-
-function! LightlineLinterErrors() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:all_errors = l:counts.error + l:counts.style_error
-    return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
-endfunction
-
-function! LightlineLinterOK() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    return l:counts.total == 0 ? '✓' : ''
-endfunction
-
-augroup _lightline_ale
-    autocmd!
-    autocmd User ALEFixPre   call lightline#update()
-    autocmd User ALEFixPost  call lightline#update()
-    autocmd User ALELintPre  call lightline#update()
-    autocmd User ALELintPost call lightline#update()
-augroup end
-
-" ===============================================================
 " ALE
 " ===============================================================
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
 let g:ale_linters_explicit = 1
 let g:ale_set_highlights = 0
 
@@ -136,10 +74,12 @@ let g:ale_linters = {
 \   'python': ['flake8']
 \ }
 
-let g:ale_fixers = {'python': ['yapf']}
+let g:ale_fixers = {
+\   'python': ['yapf']
+\ }
 
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '•'
 
 nmap <silent> ]a <Plug>(ale_next_wrap)
 nmap <silent> [a <Plug>(ale_previous_wrap)
@@ -147,10 +87,11 @@ nmap <silent> [a <Plug>(ale_previous_wrap)
 " ===============================================================
 " SIGNIFY
 " ===============================================================
-let g:signify_sign_add        = '│'
-let g:signify_sign_delete     = '│'
-let g:signify_sign_change     = '│'
-let g:signify_sign_show_count = 0
+let g:signify_disable_by_default = 1
+let g:signify_sign_add           = '|'
+let g:signify_sign_delete        = '|'
+let g:signify_sign_change        = '|'
+let g:signify_sign_show_count    = 0
 
 nnoremap <leader>ss :SignifyToggle<cr>
 nnoremap <leader>sd :SignifyHunkDiff<cr>
@@ -163,17 +104,29 @@ function! NERDTreeToggleFind()
     if exists("g:NERDTree") && g:NERDTree.IsOpen()
         NERDTreeClose
     elseif filereadable(expand("%"))
+        NERDTreeVCS
+        NERDTreeClose
         NERDTreeFind
     else
         NERDTree
     endif
 endfunction
-nnoremap <silent> <leader>n :call NERDTreeToggleFind()<cr><C-W>=
-nnoremap <silent> <leader>t :NERDTreeFocus<cr>
+nnoremap <silent> <leader>nn :call NERDTreeToggleFind()<cr><C-w>=
+nnoremap <silent> <leader>nf :NERDTreeFocus<cr>
 
 let NERDTreeMinimalUI = 1
 let NERDTreeRespectWildIgnore = 1
 let NERDTreeShowLineNumbers = 0
+
+" ===============================================================
+" UNDOTREE
+" ===============================================================
+nnoremap <leader>u :UndotreeToggle<cr><C-w>=
+let g:undotree_WindowLayout=3
+let g:undotree_SplitWidth=60
+let g:undotree_SetFocusWhenToggle=1
+let g:undotree_ShortIndicators=1
+let g:undotree_HighlightChangedText=0
 
 " ===============================================================
 " SYNTAX

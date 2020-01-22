@@ -1,66 +1,5 @@
-" vim configuration file by Abhisek Panda on Manjaro 17.1.6 Vim version 8.0
-
-"===============================================================================
-" LAYOUT OF MY VIMRC:
-" 0  - NECESSARY REQUIREMENTS
-" 1  - PLUGINS
-" 2  - CODEBASE FORMATTING
-" 3  - ADVANCED SEARCHING
-" 4  - UI SETTINGS
-" 5  - KEY BINDINGS
-" 6  - INDENTATION
-" 7  - STATUSLINE
-" 8  - DISPLAY
-" 9  - LEADER KEY
-" 10 - TEXT EDITING TRICKS
-" 11 - MISCELLANEOUS
-" 12 - PLUGIN SETTINGS
-"===============================================================================
-
-"===============================================================================
-" 0.NECESSARY REQUIREMENTS
-"===============================================================================
-
 set nocompatible
 set encoding=utf-8
-
-"===============================================================================
-" 1.PLUGINS
-"===============================================================================
-
-" Automatically install vim-plug if NOT installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/bundle')
-
-" General Plugins
-Plug 'valloric/YouCompleteMe'           " Best autocomplete engine
-Plug 'ap/vim-buftabline'                " Tabline for buffer management
-Plug 'itchyny/lightline.vim'            " Lightweight statusbar for vim
-Plug 'rhysd/clever-f.vim'               " Use f, t, F, T more conveniently
-Plug 'tpope/vim-commentary'             " Light plugin for commenting
-Plug 'mhinz/vim-grepper'                " Search for keywords from within vim
-Plug 'scrooloose/nerdtree'              " Directory view in a tree format
-Plug 'tpope/vim-surround'               " Easier quotes/parenthesis
-Plug 'godlygeek/tabular'                " Easy alignment
-Plug 'w0rp/ale'                         " Linting Engine
-Plug 'flazz/vim-colorschemes'           " One colorscheme pack to rule them all !
-Plug 'itchyny/vim-gitbranch'            " See git branch name on lightline
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" Language Specific Plugs - Python3
-Plug 'vim-python/python-syntax'
-
-call plug#end()
-
-"===============================================================================
-" 2.CODEBASE FORMATTING
-"===============================================================================
 
 set formatoptions+=1    "Don't end lines with 1-letter words
 set wrapscan
@@ -79,10 +18,6 @@ set hidden
 " persistent undo
 set undofile
 set undodir=~/.vim/undodir
-
-"===============================================================================
-" 3.ADVANCED SEARCHING
-"===============================================================================
 
 set incsearch  " search incrementally
 set hlsearch   " Highlight search results
@@ -234,10 +169,6 @@ colorscheme flattened_dark
 set scrolloff=5                           "Scroll when 12 lines from top or bottom
 set cursorline                            "Horizontal highlighting of cursorline
 
-"===============================================================================
-" 9.LEADER KEY
-"===============================================================================
-
 let mapleader = "\<Space>"
 
 " Edit my vimrc in a vert-split
@@ -247,21 +178,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Clear highlighting of searched text
 nnoremap <leader>h :nohlsearch<cr>
-
-" tabularise plugin
-vnoremap <leader>t :<C-u>Tabularize /
-
-" vimbuftabline settings
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 " Toggle quickfix window
 function! s:QuickfixToggle()
@@ -278,20 +194,6 @@ endf
 command! ToggleQuickfix call <SID>QuickfixToggle()
 nnoremap <leader>q :ToggleQuickfix<cr>
 
-"===============================================================================
-" 10.TEXT EDITING TRICKS
-"===============================================================================
-
-" for c style languages, autocomplete {
-inoremap {<cr> {}<Esc>i<cr><Esc>O
-
-" change the current word to upper case
-inoremap <c-u> <Esc>mzviwU`za
-
-"===============================================================================
-" 11.MISCELLANEOUS
-"===============================================================================
-" 11.1.Open File In Last Editing Position:
 augroup Entrypoint
     autocmd!
     " Enter vim at last edit location before closing
@@ -301,17 +203,14 @@ augroup Entrypoint
                 \ endif
 augroup END
 
-" 11.2.Timeouts:
 set timeoutlen=1000
 set ttimeoutlen=0
 
-" 11.3.Custom Color-modes
 hi MatchParen cterm=none ctermbg=190 ctermfg=196
 hi search cterm=bold ctermbg=3 ctermfg=0
 hi incsearch cterm=bold ctermbg=72 ctermfg=0
 hi Todo cterm=bold,underline ctermbg=none ctermfg=1
 
-" 11.4. Trailing White Spaces and Leading Tab characters
 hi ExtraWhiteSpace ctermbg=41
 augroup whitespace
     autocmd!
@@ -319,95 +218,3 @@ augroup whitespace
     autocmd InsertLeave * match ExtraWhitespace /\s\+$/
     autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 augroup END
-
-"===============================================================================
-" 12.PLUGIN SETTINGS
-"===============================================================================
-
-" 12.1. fzf Configurations
-nnoremap <C-p> :Files<Cr>
-
-" 12.2. vim buftabline Configurations
-hi BufTabLineFill cterm=none ctermbg=8
-hi BufTabLineHidden ctermbg=none ctermfg=245
-hi BufTabLineActive ctermbg=23 ctermfg=250
-hi BufTabLineCurrent cterm=bold ctermbg=109 ctermfg=234
-
-let g:buftabline_numbers = 2
-let g:buftabline_indicators = 1
-
-" 12.3. YouCompleteMe Configurations
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_autoclose_preview_window_after_completion = 0
-let g:ycm_show_diagnostics_ui = 0
-
-" 12.4. Clever-f Configurations
-let g:clever_f_across_no_line = 1
-let g:clever_f_timeout_ms = 2000
-hi CleverFDefaultLabel ctermbg=none ctermfg=43 cterm=underline
-
-" 12.5. Lightline config for statusline
-let g:lightline = {
-    \ 'colorscheme' : 'solarized_themer',
-    \ 'active' : {
-        \ 'left' : [ [ 'mode', 'paste' ],
-        \           [ 'readonly', 'relativepath', 'modified'] ],
-        \ 'right' : [ [ 'gitbranch' ], [ 'lineinfo' ], [ 'fileencoding', 'filetype' ] ]
-    \ },
-    \ 'inactive' : {
-        \ 'left' : [ ['relativepath'], ['modified'] ]
-    \ },
-    \ 'component' : {
-        \ 'lineinfo': "%{line('.') . '/' . line('$')}",
-    \ },
-    \ 'component_function' : {
-        \ 'gitbranch': 'gitbranch#name',
-    \ },
-    \ 'enable' : {'statusline' : 1, 'tabline' : 0}
-    \ }
-
-
-" 12.6. python syntax highlight
-let g:python_highlight_all = 1
-
-" 12.7. NerdTree Configurations
-function! NERDTreeToggleFind()
-    if exists("g:NERDTree") && g:NERDTree.IsOpen()
-        NERDTreeClose
-    elseif filereadable(expand("%"))
-        NERDTreeFind
-    else
-        NERDTreeClose
-    endif
-endfunction
-nnoremap <leader>t :call NERDTreeToggleFind()<cr>
-
-" Some sensible options
-let NERDTreeQuitOnOpen = 1
-let NERDTreeAutoDeleteBuffer = 0
-let NERDTreeMinimalUI = 1
-let NERDTreeRespectWildIgnore = 1
-let NERDTreeShowLineNumbers = 0
-
-" 12.8. Use grepper with ag for lightning fast results.
-nnoremap <leader>a :GrepperAg <space>
-
-" 12.9. ALE Configurations
-" Use quickfix list instead of loclist
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-" Lint only on saving
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_save = 1
-
-" Informative and pleasant signs
-let g:ale_sign_error = ""
-let g:ale_sign_style_error = ""
-let g:ale_sign_warning = ""
-hi ALEErrorSign cterm=bold ctermfg=1
-hi ALEStyleErrorSign ctermfg=5
-hi ALEWarningSign ctermfg=2

@@ -1,9 +1,10 @@
 " display settings
 syntax enable
 set t_Co=256
-set background=dark
 set encoding=UTF-8
 set scrolloff=5
+
+set background=dark
 colorscheme onedark
 
 " Line settings
@@ -65,13 +66,14 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.oo,*.obj,*.exe,*.dll       " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.pyc,__pycache__                " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 set wildignore+=$VIMRUNTIME/doc/*.txt            " Individual helpfiles
 set wildignore+=$VIMRUNTIME/doc/*.tar.gz         " compressed helpfiles
 set wildignore+=**/doc/*.txt
 
 set showcmd
+set noshowmode
 set cmdheight=2
 set history=1000
 

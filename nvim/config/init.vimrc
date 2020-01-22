@@ -13,11 +13,11 @@ unlet autoload_plug_path
 call plug#begin('$HOME/.config/nvim/plugged')
 
 " Autocomplete
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-Plug 'Shougo/deoplete-clangx', { 'for': 'cpp' }
+Plug 'deoplete-plugins/deoplete-clang', {'for': 'cpp'}
 
-" Colorschemes
+" UI
 Plug 'joshdick/onedark.vim'
 
 " fuzzy finder
@@ -25,34 +25,33 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Utils for editing
-Plug 'rhysd/clever-f.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'godlygeek/tabular'
-Plug 'tmsvg/pear-tree'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+Plug 'rhysd/clever-f.vim'       " level up f & t usage
+Plug 'scrooloose/nerdcommenter' " easy commenting
+Plug 'wellle/targets.vim'       " additional(and improved) text objects
+Plug 'machakann/vim-sandwich'   " add surroundings to a text object
+Plug 'junegunn/vim-easy-align'  " align characters across lines
+Plug 'junegunn/vim-peekaboo'    " see register contents before pasting
 
 " Project wide search
 Plug 'mhinz/vim-grepper'
 
-" Statusline & Tabline
-Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-gitbranch'
+" Async Linting and Fixing
+Plug 'w0rp/ale', {'for': ['python', 'cpp']}
 
-" Lint info and fixers
-Plug 'w0rp/ale'
-
-" Git info on sign column
+" Git info in gutter
 Plug 'mhinz/vim-signify'
 
 " File Explorer
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeFind', 'NERDTreeFocus'] }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeVCS'] }
+
+" Visualize vim's undo management
+Plug 'mbbill/undotree'
 
 " Language specific syntax plugins
 Plug 'vim-python/python-syntax', { 'for': 'python' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
-" Tags
+" Automate Tags Generation
 " Prerequisite: install universal-ctags
 Plug 'ludovicchabant/vim-gutentags'
 

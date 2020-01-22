@@ -13,6 +13,7 @@ echo "Creating symlinks"
 set -x
 ln -s $CONFIG/init.vim $NVIM/
 ln -s $CONFIG/config/init.vimrc $NVIM/config/
+ln -s $CONFIG/config/statusline.vimrc $NVIM/config/
 ln -s $CONFIG/config/plugins.vimrc $NVIM/config/
 ln -s $CONFIG/config/general.vimrc $NVIM/config/
 ln -s $CONFIG/config/mappings.vimrc $NVIM/config/

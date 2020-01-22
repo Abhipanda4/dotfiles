@@ -8,4 +8,4 @@ augroup END
 
 hi QuickFixLine ctermfg=170 ctermbg=None
 hi Search ctermfg=232 ctermbg=170
-hi IncSearch ctermfg=170 ctermbg=None
+hi IncSearch ctermfg=232 ctermbg=39
