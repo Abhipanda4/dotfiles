@@ -1,4 +1,5 @@
 set encoding=UTF-8
+set background=dark
 set termguicolors
 
 " Grep settings
@@ -6,6 +7,9 @@ if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ --vimgrep
     set grepformat^=%f:%l:%c:%m
 endif
+
+set completeopt+=menuone,noinsert,noselect
+set shortmess+=c
 
 " Status and tab lines
 set laststatus=2
@@ -65,7 +69,7 @@ set nowritebackup
 
 " Persistent undo
 set undofile
-set undodir=$HOME/.config/nvim/.undodir
+set undodir=$HOME/.undodir
 
 " Wildignore
 set wildignore+=.hg,.git,.svn                    " Version control
@@ -81,6 +85,5 @@ set wildignore+=$VIMRUNTIME/doc/*.tar.gz         " compressed helpfiles
 set wildignore+=**/doc/*.txt
 
 " Timeout settings
-set updatetime=100
 set timeoutlen=1000
 set ttimeoutlen=0

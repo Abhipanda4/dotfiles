@@ -9,7 +9,7 @@
 " }}}
 
 call plug#begin('$XDG_CONFIG_HOME/nvim/.vendor')
-    " Auto Completion
+    " Language Server Protocol(LSP)
     Plug 'neovim/nvim-lsp'
 
     " General Editing
@@ -21,6 +21,7 @@ call plug#begin('$XDG_CONFIG_HOME/nvim/.vendor')
     Plug 'preservim/nerdcommenter'
 
     " Project Explorer
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeVCS'] }
 
     " Interactive undo management
@@ -28,8 +29,6 @@ call plug#begin('$XDG_CONFIG_HOME/nvim/.vendor')
 
     " Make vim prettier!!
     Plug 'itchyny/lightline.vim'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
@@ -37,6 +36,6 @@ call plug#end()
 let mapleader = "\<Space>"
 
 " set colorscheme
-colorscheme onedark
+colorscheme thunder
 
 " vim: fdm=marker
